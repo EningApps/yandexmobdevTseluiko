@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'eningapps'
             keyPassword 'eningapps'
-            storeFile file('/Users/ening/eningkey')
+            storeFile file('eningkey')
             storePassword 'eningapps'
         }
     }
