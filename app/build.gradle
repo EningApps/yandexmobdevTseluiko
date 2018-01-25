@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'eningapp'
+            keyAlias 'eningkey'
             keyPassword 'eningapps'
             storeFile file('eningkey')
             storePassword 'eningapps'
