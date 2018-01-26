@@ -55,4 +55,7 @@ dependencies {
     }
     implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'net.hockeyapp.android:HockeySDK:5.1.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
+        transitive = true;
+    }
 }
