@@ -15,8 +15,6 @@ buildscript {
     }
 }
 
-apply plugin: 'checkstyle'
-apply plugin: 'findbugs'
 
 allprojects {
     repositories {
@@ -25,22 +23,6 @@ allprojects {
     }
 }
 
-task checksstyle (type: Checkstyle) {
-    configFile file('config/checkstyle.xml')
-    source 'src/main/java'
-    include '**/*.java'
-    exclude '**/gen/**'
-
-    classpath = files()
-}
-
-task findbugs(type: FindBugs) {
-    excludeFilter file('config/findbugs-exclude.xml')
-    classes = fileTree('build/classes/debug/')
-    source = fileTree('src/main/java/')
-    classpath = files()
-    effort = 'max'
-}
 
 
 task clean(type: Delete) {

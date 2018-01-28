@@ -22,15 +22,46 @@ jobs:
           root: .
           paths:
             - ./*
-  do_checks:
+  run_checkStyle:
       <<: *defaults
       steps:
+        - attach_workspace:
+            at: ~/code
+        - restore_cache:
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+        - run:
+            name: Run CkeckStyle
+            command: ./gradlew checkstyle
+  run_findBugs:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/code
+        - restore_cache:
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
         - run:
             name: Run FindBugs
             command: ./gradlew findbugs
+  run_pmd:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/code
+        - restore_cache:
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
         - run:
-            name: Run Checkstyle
-            command: ./gradlew checkstyle
+            name: Run PMD
+            command: ./gradlew pmd
+  run_lint:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+            at: ~/code
+        - restore_cache:
+            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+        - run:
+            name: Run Lint
+            command: ./gradlew lint test
   run_tests:
     <<: *defaults
     steps:
@@ -79,6 +110,18 @@ workflows:
       - run_tests:
           requires:
             - prepare_dependencies
+      - run_checkStyle:
+          requires:
+            - prepare_dependencies
+      - run_findBugs:
+          requires:
+            - prepare_dependencies
+      - run_pmd:
+          requires:
+            - prepare_dependencies
+      - run_lint:
+          requires:
+            - prepare_dependencies
       - build_app:
           requires:
             - prepare_dependencies
@@ -87,6 +130,10 @@ workflows:
             - prepare_dependencies
             - build_app
             - run_tests
+            - run_checkStyle
+            - run_findBugs
+            - run_pmd
+            - run_lint
           filters:
             branches:
               only: master
