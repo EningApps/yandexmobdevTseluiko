@@ -9,13 +9,31 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
+checkstyle {
+    toolVersion = "8.7"
+}
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
 }
 
+check.dependsOn 'lint'
+
 
 android {
+    lintOptions {
+        abortOnError false
+        xmlReport false
+        htmlReport true
+
+        lintConfig rootProject.file('config/lint/lint.xml')
+        htmlOutput rootProject.file('reports/lint/lint-result.html')
+        xmlOutput rootProject.file('reports/lint/lint-result.xml')
+    }
     signingConfigs {
         config {
             keyAlias 'eningkey'
@@ -43,6 +61,74 @@ android {
     }
 }
 
+task checkstyle(type: Checkstyle) {
+    description 'Checks if the code is somewhat acceptable'
+    group 'verification'
+
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    configProperties.checkstyleSuppressionsPath = rootProject.file('config/checkstyle/suppressions.xml')
+
+    source 'src/main/java'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    // empty classpath
+    classpath = files()
+}
+
+task findbugs(type: FindBugs) {
+    description 'Run FindBugs'
+    group 'verification'
+
+    ignoreFailures = false
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File('../config/findbugs/findbugs-exclude-filter.xml')
+    classes = rootProject.files('app/build/intermediates/classes')
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination rootProject.file('reports/findbugs/findbugs.xml')
+        }
+        html {
+            destination rootProject.file('reports/findbugs/findbugs.html')
+        }
+    }
+
+    classpath = files()
+}
+
+task pmd(type: Pmd) {
+    description 'Run PMD'
+    group 'verification'
+
+    ruleSetFiles = rootProject.files('config/pmd/pmd-rules.xml')
+    ruleSets = []
+    ignoreFailures = false
+
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination rootProject.file('reports/pmd/pmd.xml')
+        }
+        html {
+            destination rootProject.file('reports/pmd/pmd.html')
+        }
+    }
+}
+
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -50,9 +136,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
-        transitive = true;
-    }
+
     implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'net.hockeyapp.android:HockeySDK:5.1.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
