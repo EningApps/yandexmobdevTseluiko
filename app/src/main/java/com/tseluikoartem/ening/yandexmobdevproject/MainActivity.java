@@ -4,20 +4,27 @@ package com.tseluikoartem.ening.yandexmobdevproject;
 import net.hockeyapp.android.CrashManager;
 import net.hockeyapp.android.UpdateManager;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Shader;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ImageView imageView;
+    private TextView linkTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +32,18 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
-
         Bitmap book = BitmapFactory.decodeResource(getResources(),R.drawable.face);
-        ImageView imageView= (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.imageView);
         imageView.setImageBitmap(getRoundedBitmap(book));
+
+        linkTextView=findViewById(R.id.textViewGit);
+        linkTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Intent browser_intent=new Intent(Intent.ACTION_VIEW, Uri.parse(linkTextView.getText().toString()));
+                startActivity(browser_intent);
+            }
+        });
 
 
         checkForUpdates();
