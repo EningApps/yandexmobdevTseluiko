@@ -22,6 +22,15 @@ jobs:
           root: .
           paths:
             - ./*
+  do_checks:
+      <<: *defaults
+      steps:
+        - run:
+            name: Run FindBugs
+            command: ./gradlew findbugs
+        - run:
+            name: Run Checkstyle
+            command: ./gradlew checkstyle
   run_tests:
     <<: *defaults
     steps:
