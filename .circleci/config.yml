@@ -113,9 +113,6 @@ workflows:
       - run_checkStyle:
           requires:
             - prepare_dependencies
-      - run_findBugs:
-          requires:
-            - prepare_dependencies
       - run_pmd:
           requires:
             - prepare_dependencies
