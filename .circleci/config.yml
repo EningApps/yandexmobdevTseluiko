@@ -118,7 +118,6 @@ workflows:
             - build_app
             - run_tests
             - run_checkStyle
-            - run_findBugs
             - run_pmd
             - run_lint
           filters:
