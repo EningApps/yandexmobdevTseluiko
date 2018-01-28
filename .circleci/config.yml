@@ -32,16 +32,6 @@ jobs:
         - run:
             name: Run CkeckStyle
             command: ./gradlew checkstyle
-  run_findBugs:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/code
-        - restore_cache:
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-        - run:
-            name: Run FindBugs
-            command: ./gradlew findbugs
   run_pmd:
       <<: *defaults
       steps:
