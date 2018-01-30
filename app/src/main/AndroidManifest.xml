@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tseluikoartem.ening.yandexmobdevproject">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,19 +11,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="net.hockeyapp.android.appIdentifier" android:value="${HOCKEYAPP_APP_ID}" />
+        <meta-data
+            android:name="net.hockeyapp.android.appIdentifier"
+            android:value="${HOCKEYAPP_APP_ID}" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.GreetingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="31180e98341589f1bc92f1205f76d0e0bd26be31" />
+
+        <activity android:name=".activities.AppInfoActivity" />
+        <activity android:name=".activities.ThemeChoiceActivity" />
+        <activity android:name=".activities.IconsAmountSetActivity" />
+        <activity
+            android:name=".activities.ScrollingLauncActivity"
+            android:label="@string/title_activity_scrolling_launc"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".activities.ScrollingListActivity"></activity>
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

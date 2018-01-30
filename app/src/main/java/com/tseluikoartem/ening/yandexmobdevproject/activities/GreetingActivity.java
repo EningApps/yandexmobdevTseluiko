@@ -1,4 +1,4 @@
-package com.tseluikoartem.ening.yandexmobdevproject;
+package com.tseluikoartem.ening.yandexmobdevproject.activities;
 
 
 import net.hockeyapp.android.CrashManager;
@@ -15,26 +15,31 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
+import com.tseluikoartem.ening.yandexmobdevproject.R;
 
-public class MainActivity extends AppCompatActivity {
+import io.fabric.sdk.android.Fabric;
+import utils.ImageViewRounder;
+
+public class GreetingActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView linkTextView;
+    Button buttonContinue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.greeting_activity);
 
         Bitmap book = BitmapFactory.decodeResource(getResources(),R.drawable.face);
         imageView = (ImageView) findViewById(R.id.imageView);
-        imageView.setImageBitmap(getRoundedBitmap(book));
+        imageView.setImageBitmap(ImageViewRounder.getRoundedBitmap(book));
 
         linkTextView=findViewById(R.id.textViewGit);
         linkTextView.setOnClickListener(new View.OnClickListener() {
@@ -46,18 +51,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        checkForUpdates();
-    }
+        buttonContinue= (Button) findViewById(R.id.buttonContGreeting);
+        buttonContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Intent intent=new Intent(getApplicationContext(),AppInfoActivity.class);
+                startActivity(intent);
+            }
+        });
 
-    public Bitmap getRoundedBitmap(Bitmap bitmap){
-        Bitmap circleBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        BitmapShader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        Paint paint = new Paint();
-        paint.setShader(shader);
-        paint.setAntiAlias(true);
-        Canvas c = new Canvas(circleBitmap);
-        c.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
-        return circleBitmap;
+        checkForUpdates();
     }
 
     @Override
