@@ -1,4 +1,4 @@
-package launcher;
+package com.tseluikoartem.ening.yandexmobdevproject.activities.list;
 
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -12,31 +12,32 @@ import com.tseluikoartem.ening.yandexmobdevproject.R;
 
 import java.util.List;
 
+
 /**
  * Created by ening on 30.01.18.
  */
 
-public class IconRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class NoteRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<Integer> data;
 
-    public IconRecycleAdapter(List<Integer> data) {
+    public NoteRecycleAdapter(List<Integer> data) {
         this.data = data;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.icon_layout, parent, false);
-        return new IconHolder.GridHolder(view);
+        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_layout, parent, false);
+        return new NoteHolder.NoteKeeper(view);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        final View colorView = ((IconHolder.GridHolder) holder).getIconColorView();
-        colorView.setOnLongClickListener(new View.OnLongClickListener() {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
+        final View noteLayout = ((NoteHolder.NoteKeeper) holder).getNoteLayoutView();
+        noteLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Snackbar deleteSnackbar = Snackbar.make(view, "Удалить иконку?", Snackbar.LENGTH_LONG)
+                Snackbar deleteSnackbar = Snackbar.make(view, "Удалить запись?", Snackbar.LENGTH_LONG)
                         .setAction("Да", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
@@ -63,18 +64,20 @@ public class IconRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         Log.d("SnackBar", "onShown");
                     }
                 });
+
                 return true;
             }
         });
+        final View colorView = ((NoteHolder.NoteKeeper) holder).getIconColorView();
         colorView.setBackgroundColor(data.get(position));
-        final TextView textView = (TextView) ((IconHolder.GridHolder) holder).getIconTextView();
-        textView.setText(String.format("#%06X", 0xFFFFFF & data.get(position)));
+        final TextView titleTextView=(TextView) ((NoteHolder.NoteKeeper) holder).getTitleTextView();
+        titleTextView.setText(String.format("#%06X", 0xFFFFFF & data.get(position)));
+        final TextView discrTextView=(TextView) ((NoteHolder.NoteKeeper) holder).getDiscrTextView();
+        discrTextView.setText("Some long long very long long text");
     }
 
     @Override
     public int getItemCount() {
         return data.size();
     }
-
 }
-

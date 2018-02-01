@@ -42,16 +42,6 @@ jobs:
         - run:
             name: Run PMD
             command: ./gradlew pmd
-  run_lint:
-      <<: *defaults
-      steps:
-        - attach_workspace:
-            at: ~/code
-        - restore_cache:
-            key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-        - run:
-            name: Run Lint
-            command: ./gradlew lint test
   run_tests:
     <<: *defaults
     steps:
@@ -106,9 +96,6 @@ workflows:
       - run_pmd:
           requires:
             - prepare_dependencies
-      - run_lint:
-          requires:
-            - prepare_dependencies
       - build_app:
           requires:
             - prepare_dependencies
@@ -119,7 +106,6 @@ workflows:
             - run_tests
             - run_checkStyle
             - run_pmd
-            - run_lint
           filters:
             branches:
               only: master
