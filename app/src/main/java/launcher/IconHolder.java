@@ -23,8 +23,6 @@ class IconHolder {
             iconTextView = (TextView) view.findViewById(R.id.icon_text);
         }
 
-
-
         public View getIconColorView() {
             return iconColorView;
         }

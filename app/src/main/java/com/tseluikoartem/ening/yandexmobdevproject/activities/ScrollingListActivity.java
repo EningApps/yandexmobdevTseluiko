@@ -88,6 +88,7 @@ public class ScrollingListActivity extends AppCompatActivity
             intent=new Intent(this,ScrollingListActivity.class);
         } else if (id == R.id.nav_settings) {
             intent=new Intent(this,GreetingActivity.class);
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_list_activity);
         drawer.closeDrawer(GravityCompat.START);

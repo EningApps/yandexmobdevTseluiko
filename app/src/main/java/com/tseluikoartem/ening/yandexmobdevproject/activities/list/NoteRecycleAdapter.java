@@ -28,12 +28,12 @@ public class NoteRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.note_layout, parent, false);
-        return new NoteHolder.NoteKeeper(view);
+        return new NoteHolder.LinearHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder,final int position) {
-        final View noteLayout = ((NoteHolder.NoteKeeper) holder).getNoteLayoutView();
+        final View noteLayout = ((NoteHolder.LinearHolder) holder).getNoteLayoutView();
         noteLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -68,11 +68,11 @@ public class NoteRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 return true;
             }
         });
-        final View colorView = ((NoteHolder.NoteKeeper) holder).getIconColorView();
+        final View colorView = ((NoteHolder.LinearHolder) holder).getIconColorView();
         colorView.setBackgroundColor(data.get(position));
-        final TextView titleTextView=(TextView) ((NoteHolder.NoteKeeper) holder).getTitleTextView();
+        final TextView titleTextView=(TextView) ((NoteHolder.LinearHolder) holder).getTitleTextView();
         titleTextView.setText(String.format("#%06X", 0xFFFFFF & data.get(position)));
-        final TextView discrTextView=(TextView) ((NoteHolder.NoteKeeper) holder).getDiscrTextView();
+        final TextView discrTextView=(TextView) ((NoteHolder.LinearHolder) holder).getDiscrTextView();
         discrTextView.setText("Some long long very long long text");
     }
 

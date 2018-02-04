@@ -26,23 +26,32 @@
         <activity android:name=".activities.IconsAmountSetActivity" />
         <activity
             android:name=".activities.ScrollingLauncActivity"
-            android:label="@string/title_activity_scrolling_launc"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
             android:name=".activities.ScrollingListActivity"
             android:label="@string/title_activity_scrolling_list"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/title_activity_preferencies" />
+
+        <!-- <activity android:name=".activities.WelcomeActivity" -->
+        <!-- android:theme="@style/SplashTheme"> -->
+
+
+        <!-- </activity> -->
+
+        <activity android:name=".activities.IconExtendedInformationActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog">
 
         </activity>
-
     </application>
 
 </manifest>

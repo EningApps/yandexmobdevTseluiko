@@ -12,12 +12,12 @@ import com.tseluikoartem.ening.yandexmobdevproject.R;
 
 class NoteHolder{
 
-    static class NoteKeeper extends RecyclerView.ViewHolder {
+    static class LinearHolder extends RecyclerView.ViewHolder {
 
         private final View iconColorView, noteLayoutView;
         private final TextView titleTextView, discrTextView;
 
-        NoteKeeper (final View view) {
+        LinearHolder(final View view) {
             super(view);
             iconColorView = view.findViewById(R.id.color_view);
             titleTextView = (TextView) view.findViewById(R.id.textViewTitle);

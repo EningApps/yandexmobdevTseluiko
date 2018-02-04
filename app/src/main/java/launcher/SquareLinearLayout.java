@@ -24,6 +24,6 @@ public class SquareLinearLayout extends LinearLayout {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec,widthMeasureSpec+10);
+        super.onMeasure(widthMeasureSpec,widthMeasureSpec+60);
     }
 }
