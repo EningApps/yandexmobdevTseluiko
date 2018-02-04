@@ -50,8 +50,8 @@ public class IconExtendedInformationActivity extends AppCompatActivity {
         mAppLabelTextView.setText(appLabel);
         mAppLaunchCountTextView.setText(
                                 String.valueOf(launchCount)+
-                                ((String.valueOf(launchCount).endsWith("0")||String.valueOf(launchCount).endsWith("1"))
-                                ? " раз":" раза"));
+                                ((String.valueOf(launchCount).endsWith("2")||String.valueOf(launchCount).endsWith("3")||String.valueOf(launchCount).endsWith("4"))
+                                ? " раза":" раз"));
         mAppInstallTimeTextView.setText(String.valueOf(appInstallTime));
         mSourceDir.setText(appSourceDir);
 

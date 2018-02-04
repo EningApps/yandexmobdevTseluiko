@@ -7,14 +7,14 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.Toast;
 
 import database.AppsDbHelper;
 
 public class ApplicationOperationsReciver extends BroadcastReceiver {
 
-    private IconRecycleAdapter adapter;
+    private LauncherRecyclerAbstractAdapter adapter;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -24,7 +24,7 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
         Log.d("RECIVER", "package - " +appPackage);
 
         if(action.equals("android.intent.action.PACKAGE_ADDED")){
-            PackageManager packageManager = adapter.getPackageManager();
+            PackageManager packageManager = context.getPackageManager();
             ApplicationInfo appInfo=null;
             try {
                 appInfo = packageManager.getApplicationInfo(appPackage.substring("package:".length()),0);
@@ -74,11 +74,8 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
         }
     }
 
-    public IconRecycleAdapter getAdapter() {
-        return adapter;
-    }
 
-    public void setAdapter(IconRecycleAdapter adapter) {
+    public void setAdapter(LauncherRecyclerAbstractAdapter adapter) {
         this.adapter = adapter;
     }
 }

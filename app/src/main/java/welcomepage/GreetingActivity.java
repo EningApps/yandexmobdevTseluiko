@@ -1,4 +1,4 @@
-package com.tseluikoartem.ening.yandexmobdevproject.activities;
+package welcomepage;
 
 
 import net.hockeyapp.android.CrashManager;
@@ -25,7 +25,7 @@ public class GreetingActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private TextView linkTextView;
-    Button buttonContinue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,15 +46,6 @@ public class GreetingActivity extends AppCompatActivity {
             }
         });
 
-
-        buttonContinue= (Button) findViewById(R.id.buttonContGreeting);
-        buttonContinue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Intent intent=new Intent(getApplicationContext(),AppInfoActivity.class);
-                startActivity(intent);
-            }
-        });
 
         checkForUpdates();
     }

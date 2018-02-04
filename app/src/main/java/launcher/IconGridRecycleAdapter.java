@@ -1,6 +1,5 @@
 package launcher;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,7 +19,6 @@ import android.widget.Toast;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.IconExtendedInformationActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import database.AppsDbHelper;
@@ -29,27 +27,33 @@ import database.AppsDbHelper;
  * Created by ening on 30.01.18.
  */
 
-public class IconRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class IconGridRecycleAdapter extends LauncherRecyclerAbstractAdapter{
 
     List<AppModel> data;
     private PackageManager mPackageManager;
     private Context mContext;
+    private int layoutType;
 
-    public IconRecycleAdapter(List<AppModel> data,PackageManager packageManager, Context context) {
-        this.mContext = context;
-        this.mPackageManager = packageManager;
+    public IconGridRecycleAdapter(List<AppModel> data, PackageManager mPackageManager, Context mContext, int layoutType) {
         this.data = data;
+        this.mPackageManager = mPackageManager;
+        this.mContext = mContext;
+        this.layoutType = layoutType;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.icon_layout, parent, false);
-        return new IconHolder.GridHolder(view);
+        View view = null;
+        if (layoutType==1)
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.icon_linear_layout, parent, false);
+        else view = LayoutInflater.from(parent.getContext()).inflate(R.layout.icon_grid_layout, parent, false);
+
+        return new RecyclerViewHolder.IconHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        final View iconView = ((IconHolder.GridHolder) holder).getIconColorView();
+        final View iconView = ((RecyclerViewHolder.IconHolder) holder).getIconView();
         iconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +81,7 @@ public class IconRecycleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         });
         iconView.setOnLongClickListener(new PopMenuShower(mContext,position));
         iconView.setBackground(data.get(position).getIcon());
-        final TextView textView = (TextView) ((IconHolder.GridHolder) holder).getIconTextView();
+        final TextView textView = (TextView) ((RecyclerViewHolder.IconHolder) holder).getTitleTextView();
         textView.setText(data.get(position).getLabel());
     }
 

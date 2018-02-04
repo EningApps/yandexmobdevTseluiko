@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.tseluikoartem.ening.yandexmobdevproject.welcomepage.ThemeChoiceActivity">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp">
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButton1"
+                android:layout_width="320dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:text="Светлая тема"
+                android:textAlignment="center"
+                android:textSize="26sp" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="320dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                android:text="Тёмная тема"
+                android:textAlignment="center"
+                android:textSize="26sp" />
+            />
+        </RadioGroup>
+
+
+    </FrameLayout>
+
+
+
+</RelativeLayout>

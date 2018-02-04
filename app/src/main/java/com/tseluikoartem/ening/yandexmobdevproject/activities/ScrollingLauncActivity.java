@@ -16,29 +16,36 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-
-
 import com.tseluikoartem.ening.yandexmobdevproject.R;
+
+import launcher.LauncherRecyclerAbstractAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import database.AppsDbHelper;
 import launcher.AppModel;
 import launcher.ApplicationOperationsReciver;
-import launcher.IconRecycleAdapter;
+import launcher.IconGridRecycleAdapter;
 import launcher.OffsetItemDecoration;
+import welcomepage.AppWelcomeInfoActivity;
+import welcomepage.GreetingActivity;
 
 public class ScrollingLauncActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private boolean mIsFirstLaunch;
     private ApplicationOperationsReciver mReciver;
+    private List<AppModel> mData;
+    private RecyclerView mLauncherRecyclerView;
+    private AppsDbHelper mBdHelper;
+    private PackageManager mPackageManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,23 +61,28 @@ public class ScrollingLauncActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         final View navigationHeaderView = navigationView.getHeaderView(0);
         final View profileImage = navigationHeaderView.findViewById(R.id.imageViewHeader);
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent(getApplicationContext(),GreetingActivity.class);
+                final Intent intent = new Intent(getApplicationContext(), GreetingActivity.class);
                 startActivity(intent);
             }
         });
 
-        mReciver = new ApplicationOperationsReciver();
+        mPackageManager = getPackageManager();
+        mBdHelper = new AppsDbHelper(this);
+        if(mIsFirstLaunch)
+            mData = loadDataFromSystem(mBdHelper,mPackageManager);
+        else mData = loadDataFromDB(mBdHelper,mPackageManager);
 
-        createGridLayout();//тут есть костыль на получение адаптера ресивером в методе createGridLayout()
+        mLauncherRecyclerView = findViewById(R.id.louncher_content);
+
+        mReciver = new ApplicationOperationsReciver();
+        createGridLayout();//в этом методе происходит получение ресивером адаптера
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -82,26 +94,26 @@ public class ScrollingLauncActivity extends AppCompatActivity
     }
 
 
-    private void createGridLayout() {
-        final RecyclerView recyclerView = findViewById(R.id.louncher_content);
-        recyclerView.setHasFixedSize(true);
+    private LauncherRecyclerAbstractAdapter createGridLayout() {
         final int offset = 8;
-        recyclerView.addItemDecoration(new OffsetItemDecoration(offset));
-
+        mLauncherRecyclerView.addItemDecoration(new OffsetItemDecoration(offset));
         final int spanCount = 4;
-        final GridLayoutManager layoutManager = new GridLayoutManager(this, spanCount);
-        recyclerView.setLayoutManager(layoutManager);
 
-        final PackageManager packageManager = getPackageManager();
-        List<AppModel> data = null;
-        AppsDbHelper bsHelper = new AppsDbHelper(this);
-        if(mIsFirstLaunch)
-            data = loadDataFromSystem(bsHelper,packageManager);
-        else data = loadDataFromDB(bsHelper,packageManager);
-        final IconRecycleAdapter launcherAdapter = new IconRecycleAdapter(data,packageManager,this);
-        recyclerView.setAdapter(launcherAdapter);
-        mReciver.setAdapter(launcherAdapter);
+        final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, spanCount);
+        mLauncherRecyclerView.setLayoutManager(gridLayoutManager);
+        final IconGridRecycleAdapter iconGridRecycleAdapter = new IconGridRecycleAdapter(this.mData,mPackageManager,this,0);
+        mLauncherRecyclerView.setAdapter(iconGridRecycleAdapter);
+        return iconGridRecycleAdapter;
     }
+
+    private LauncherRecyclerAbstractAdapter createLinearLayout() {
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        mLauncherRecyclerView.setLayoutManager(layoutManager);
+        final IconGridRecycleAdapter linearRecycleAdapter = new IconGridRecycleAdapter(this.mData,mPackageManager,this,1);
+        mLauncherRecyclerView.setAdapter(linearRecycleAdapter);
+        return linearRecycleAdapter;
+    }
+
 
     private List<AppModel> loadDataFromDB(AppsDbHelper dbHelper,PackageManager packageManager){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -158,17 +170,16 @@ public class ScrollingLauncActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        Intent intent=null;
         if (id == R.id.nav_launcher) {
-            intent=new Intent(this,ScrollingLauncActivity.class);
+            createGridLayout();
         } else if (id == R.id.nav_list) {
-            intent=new Intent(this,ScrollingListActivity.class);
+            createLinearLayout();
         } else if (id == R.id.nav_settings) {
-            intent=new Intent(this,SettingsActivity.class);
+           // intent=new Intent(this,SettingsActivity.class);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_launcher_activity);
         drawer.closeDrawer(GravityCompat.START);
-        startActivity(intent);
+        //startActivity(intent);
         return true;
     }
 
@@ -179,11 +190,10 @@ public class ScrollingLauncActivity extends AppCompatActivity
         boolean firstStart = sp.getBoolean(SP_KEY_FIRST_START, true);
         if(firstStart) {
             sp.edit().putBoolean(SP_KEY_FIRST_START, false).apply();
-            Intent intent = new Intent(this, AppInfoActivity.class);
+            Intent intent = new Intent(this, AppWelcomeInfoActivity.class);
             startActivity(intent);
         }
         return firstStart;
     }
-
 
 }
