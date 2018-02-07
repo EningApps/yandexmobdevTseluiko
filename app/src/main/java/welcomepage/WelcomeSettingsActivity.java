@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-
-
 import static utils.ApplicationConstants.SharedPreferenciesConstants.*;
 
 public class WelcomeSettingsActivity extends AppCompatActivity

@@ -1,0 +1,121 @@
+<resources>
+    <string name="app_name">Tseluiko</string>
+    <string name="title_activity_scrolling_launc">ScrollingLauncActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_scrolling_list">ScrollingListActivity</string>
+
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="title_activity_preferencies">Settings</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">Основные</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vkontakte</string>
+    <string name="applicationFullName">Полное имя :</string>
+    <string name="applicationShortName">Краткое имя :</string>
+    <string name="applicationLaunchedCount">Приложение было запущено :</string>
+    <string name="applicationInstallTime">Время устновки :</string>
+    <string name="applicationSourceDir">Исходная директория:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_welcome_info">Добро пожаловать в LightonLauncher ! С его помощью вы легко можете запускать и удалять приложения, а также узнать о них дополнительную информацию.</string>
+    <string name="go_to_guide">Пройти обучение</string>
+    <string name="go_to_app">Перейти к приложению</string>
+    <string name="standart_layout">Стандартный макет</string>
+    <string name="four_icons">Портретная: 4 иконки в ряд</string>
+    <string name="six_icons">Ландшафтная: 6 иконок в ряд</string>
+    <string name="large_layout">Плотный макет</string>
+    <string name="fifth_icons">Портретная: 5 иконок в ряд</string>
+    <string name="seven_icons">Ландшафтная: 7 иконок в ряд</string>
+    <string name="finish_setting">Закончить настройку</string>
+    <string name="light_theme">Светлая тема</string>
+    <string name="dark_theme">Тёмная тема</string>
+    <string name="developername">Имя разработчика</string>
+    <string name="showGit">GitHub</string>
+    <string name="showTwitter">Twitter</string>
+    <string name="showFacebook">Facebook</string>
+    <string name="profileSettings">Настройки профиля</string>
+    <string name="showWelcomePageNext">Показать при следующем запуске WelcomePage</string>
+    <string name="maketType">Тип макета</string>
+    <string name="dialog_title_list_preference">Выберите тип макета</string>
+    <string name="theme_type">Тема приложения</string>
+    <string name="dialog_title_theme_pref">Выберите тему</string>
+    <string name="appSort">Фильтр приложений</string>
+    <string name="chooseSort">Выберите тип фильтра</string>
+    <string name="deleteApp">Удалить</string>
+    <string name="appExInfo">Информация</string>
+    <string name="appSettings">Настройки</string>
+    <string name="gridType">Сетка</string>
+    <string name="listType">Список</string>
+    <string name="settings">Настройки</string>
+</resources>
