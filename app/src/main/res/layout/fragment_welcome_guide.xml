@@ -8,6 +8,8 @@
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="201dp"
-        android:text="welcome guide" />
+        android:layout_height="match_parent"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:text="Тут будут красивые картинки и краткий гайд.Но дизайнер пока в отпуске." />
 </LinearLayout>

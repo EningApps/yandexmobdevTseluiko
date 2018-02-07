@@ -80,18 +80,18 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vkontakte</string>
-    <string name="applicationFullName">Полное имя :</string>
-    <string name="applicationShortName">Краткое имя :</string>
-    <string name="applicationLaunchedCount">Приложение было запущено :</string>
-    <string name="applicationInstallTime">Время устновки :</string>
-    <string name="applicationSourceDir">Исходная директория:</string>
+    <string name="applicationFullName">الاسم الكامل :</string>
+    <string name="applicationShortName">اسم العرض :</string>
+    <string name="applicationLaunchedCount">كان التطبيق قيد التشغيل :</string>
+    <string name="applicationInstallTime">وقت التثبيت :</string>
+    <string name="applicationSourceDir">الدليل المصد :</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="app_welcome_info">Добро пожаловать в LightonLauncher ! С его помощью вы легко можете запускать и удалять приложения, а также узнать о них дополнительную информацию.</string>
-    <string name="go_to_guide">Пройти обучение</string>
-    <string name="go_to_app">Перейти к приложению</string>
-    <string name="standart_layout">Стандартный макет</string>
+    <string name="app_welcome_info">ما يجب عمله: إزالة أو تغيير هذا العنصر النائب النص</string>
+    <string name="go_to_guide">مرحبا فارغة جزء</string>
+    <string name="go_to_app"> مع أنه يمكنك بسهولة </string>
+    <string name="standart_layout">الحصول على التدريب</string>
     <string name="four_icons">Портретная: 4 иконки в ряд</string>
     <string name="six_icons">Ландшафтная: 6 иконок в ряд</string>
     <string name="large_layout">Плотный макет</string>

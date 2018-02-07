@@ -10,82 +10,95 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:background="@color/colorAccentLight"
+
         android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:id="@+id/frameLayout">
 
-        <LinearLayout
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:layout_marginBottom="16dp">
-
-            <RadioButton
+            android:layout_height="match_parent">
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_gravity="center"
-                    android:textAlignment="center"
-                    android:textSize="30sp"
-                    android:text="@string/standart_layout" />
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:text="@string/four_icons" />
+                    <LinearLayout
+                        android:id="@+id/standartMaketField"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/lightGray1"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="8dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:textAlignment="center"
-                    android:textSize="20sp"
-                    android:text="@string/six_icons" />
+                        <RadioButton
+                            android:id="@+id/radioButtonStandartMaket"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            android:textSize="30sp"
+                            android:text="@string/standart_layout" />
 
-            </LinearLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:text="@string/four_icons" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:textAlignment="center"
+                            android:textSize="20sp"
+                            android:text="@string/six_icons" />
+                    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/largeMaketField"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/lightGray1"
+                        android:orientation="vertical">
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_gravity="center"
-                    android:textSize="30sp"
-                    android:text="@string/large_layout"
-                    android:textAlignment="center" />
+                        <RadioButton
+                            android:id="@+id/radioButtonLargeMaket"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:layout_gravity="center"
+                            android:textSize="30sp"
+                            android:text="@string/large_layout"
+                            android:textAlignment="center" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:textSize="20sp"
-                    android:text="@string/fifth_icons"
-                    android:textAlignment="center" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:textSize="20sp"
+                            android:text="@string/fifth_icons"
+                            android:textAlignment="center" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:textSize="20sp"
+                            android:text="@string/seven_icons"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:textSize="20sp"
-                    android:text="@string/seven_icons"
-                    android:textAlignment="center" />
+        </RadioGroup>
 
-            </LinearLayout>
-        </LinearLayout>
+
     </FrameLayout>
 
     <Button

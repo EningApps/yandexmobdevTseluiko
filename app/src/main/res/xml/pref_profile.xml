@@ -1,0 +1,28 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <EditTextPreference
+        android:defaultValue="Tseluiko Artem"
+        android:key="profile_pref"
+        android:title="@string/developername"/>
+
+    <PreferenceCategory
+        android:title="Контакты">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="show_github"
+            android:title="@string/showGit" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="show_twitter"
+           android:title="@string/showTwitter" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="show_facebook"
+            android:title="@string/showFacebook" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="show_vk"
+            android:title="@string/pref_title_vibrate" />
+   </PreferenceCategory>
+</PreferenceScreen>

@@ -12,4 +12,11 @@ public abstract class LauncherRecyclerAbstractAdapter extends RecyclerView.Adapt
 
     List<AppModel> data;
 
+    public List<AppModel> getData() {
+        return data;
+    }
+
+    public void setData(List<AppModel> data) {
+        this.data = data;
+    }
 }

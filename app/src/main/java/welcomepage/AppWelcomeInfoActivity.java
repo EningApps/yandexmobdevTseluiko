@@ -1,8 +1,10 @@
 package welcomepage;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,16 +12,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.tseluikoartem.ening.yandexmobdevproject.activities.ScrollingLauncActivity;
+import launcher.MainLauncherActivity;
 
 import utils.ImageViewRounder;
+
+import static utils.ApplicationConstants.SharedPreferenciesConstants.SHOW_WELCOMEPAGE_KEY;
 
 public class AppWelcomeInfoActivity extends AppCompatActivity{
 
     private ImageView mImageViewAppIcon;
     private Button mGoToSettingsButton , mGoToAppButton;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,9 @@ public class AppWelcomeInfoActivity extends AppCompatActivity{
         mGoToAppButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Intent intent = new Intent(getApplicationContext(),ScrollingLauncActivity.class);
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                sp.edit().putBoolean(SHOW_WELCOMEPAGE_KEY, false).apply();
+                final Intent intent = new Intent(getApplicationContext(),MainLauncherActivity.class);
                 startActivity(intent);
             }
         });

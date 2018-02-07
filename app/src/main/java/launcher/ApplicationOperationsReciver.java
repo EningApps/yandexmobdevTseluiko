@@ -7,7 +7,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import database.AppsDbHelper;
@@ -20,8 +19,7 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         String appPackage = intent.getDataString();
-        Log.d("RECIVER", "action - " +intent.getAction());
-        Log.d("RECIVER", "package - " +appPackage);
+
 
         if(action.equals("android.intent.action.PACKAGE_ADDED")){
             PackageManager packageManager = context.getPackageManager();
@@ -53,7 +51,7 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
                 appModel.setIcon(appIcon);
                 appModel.setLabel(appLabel);
                 adapter.data.add(appModel);
-                adapter.notifyItemRemoved(0);
+                adapter.notifyDataSetChanged();
                 adapter.notifyItemRangeChanged(0, adapter.data.size());
             }
         }else if(action.equals("android.intent.action.PACKAGE_REMOVED")){

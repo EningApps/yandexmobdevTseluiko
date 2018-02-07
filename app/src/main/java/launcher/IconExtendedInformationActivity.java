@@ -1,4 +1,4 @@
-package com.tseluikoartem.ening.yandexmobdevproject.activities;
+package launcher;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -25,6 +25,7 @@ public class IconExtendedInformationActivity extends AppCompatActivity {
         mAppInstallTimeTextView = findViewById(R.id.textViewInstalledTime);
         mSourceDir = findViewById(R.id.textViewSourceDir);
 
+
         final Intent fIntent = getIntent();
         int launchCount=0;
         long appInstallTime=0;
@@ -48,15 +49,13 @@ public class IconExtendedInformationActivity extends AppCompatActivity {
         }
         mAppNameTextView.setText(appName);
         mAppLabelTextView.setText(appLabel);
+        String launchCountStr =  String.valueOf(launchCount);
         mAppLaunchCountTextView.setText(
-                                String.valueOf(launchCount)+
-                                ((String.valueOf(launchCount).endsWith("2")||String.valueOf(launchCount).endsWith("3")||String.valueOf(launchCount).endsWith("4"))
+                                launchCountStr+
+                                ((launchCountStr.endsWith("2")||launchCountStr.endsWith("3")||launchCountStr.endsWith("4"))
                                 ? " раза":" раз"));
         mAppInstallTimeTextView.setText(String.valueOf(appInstallTime));
         mSourceDir.setText(appSourceDir);
 
     }
 }
-//todo:  перенести два адаптора в один класс
-//todo: fix bug with permission field
-//todo: rename it to packagename;

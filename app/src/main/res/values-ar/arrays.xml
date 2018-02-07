@@ -20,23 +20,23 @@
     </array>
 
     <string-array name="maket_type">
-        <item>Плотный макет</item>
-        <item>Обычный макет</item>
+        <item>وتخطيط محكم</item>
+        <item>تخطيط العادي</item>
     </string-array>
     <string-array name="span_count">
         <item>5</item>
         <item>4</item>
     </string-array>
     <string-array name="theme_type">
-        <item>Светлая тема</item>
-        <item>Тёмная тема</item>
+        <item>موضوع خفيف</item>
+        <item>موضوع الظلام</item>
     </string-array>
     <string-array name="sort_type">
-        <item>Без сортировки</item>
-        <item>По времени установки</item>
-        <item>По алфавиту A-Z</item>
-        <item>По алфавиту Z-A</item>
-        <item>По количеству запусков</item>
+        <item>لا يصنف</item>
+        <item>وقت التثبيت</item>
+        <item>الأبجدي من الألف إلى الياء</item>
+        <item>الأبجدي</item>
+        <item>تطلق</item>
     </string-array>
     <string-array name="sort_number">
         <item>0</item>
