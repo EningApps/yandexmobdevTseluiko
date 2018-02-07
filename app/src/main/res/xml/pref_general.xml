@@ -1,0 +1,28 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="maket_type"
+        android:title="@string/maketType"
+        android:entries="@array/maket_type"
+        android:entryValues="@array/span_count"
+        android:dialogTitle="@string/dialog_title_list_preference" />
+
+    <ListPreference
+        android:key="theme_key"
+        android:title="@string/theme_type"
+        android:entries="@array/theme_type"
+        android:entryValues="@array/theme_type"
+        android:dialogTitle="@string/dialog_title_theme_pref" />
+    <ListPreference
+        android:key="sort_key"
+        android:title="@string/appSort"
+        android:entries="@array/sort_type"
+        android:entryValues="@array/sort_number"
+        android:dialogTitle="@string/chooseSort" />
+
+    <CheckBoxPreference
+        android:key="show_welcomepage"
+        android:title="@string/showWelcomePageNext"
+        android:defaultValue="false"/>
+
+</PreferenceScreen>

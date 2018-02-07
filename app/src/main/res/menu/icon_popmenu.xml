@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/pop_menu_del"
+        android:icon="@drawable/ic_delete_forever_black_24dp"
+        android:title="@string/deleteApp"/>
+    <item
+        android:id="@+id/pop_menu_info"
+        android:icon="@drawable/ic_info_black_24dp"
+        android:title="@string/appExInfo"/>
+    <item
+        android:id="@+id/pop_menu_settings"
+        android:icon="@drawable/ic_build_black_24dp"
+        android:title="@string/appSettings"/>
+</menu>
