@@ -37,13 +37,13 @@ import java.util.ArrayList;
 
 import java.util.List;
 import database.AppsDbHelper;
+import utils.ApplicationConstants;
 import utils.ImageViewRounder;
-import welcomepage.AppWelcomeInfoActivity;
 
 import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
 import static utils.ApplicationConstants.SharedPreferenciesConstants.APPLICATION_SORT;
+import static utils.ApplicationConstants.SharedPreferenciesConstants.IS_FIRST_LAUNCH_KEY;
 import static utils.ApplicationConstants.SharedPreferenciesConstants.MAKET_TYPE_KEY;
-import static utils.ApplicationConstants.SharedPreferenciesConstants.SHOW_WELCOMEPAGE_KEY;
 import static utils.ApplicationConstants.SharedPreferenciesConstants.THEME_CHOICE_KEY;
 import static utils.ApplicationConstants.SharedPreferenciesConstants.THEME_DARK;
 import static utils.ApplicationConstants.SharedPreferenciesConstants.THEME_LIGHT;
@@ -64,7 +64,7 @@ public class MainLauncherActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
 
         switchTheme();
-        mIsFirstLaunch = checkIsWelcomePageNeeded();
+        mIsFirstLaunch = checkIsFirstLaunch();
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
@@ -252,18 +252,24 @@ public class MainLauncherActivity extends AppCompatActivity
         }
     }
 
+    private boolean checkIsFirstLaunch(){
+        SharedPreferences sp = getSharedPreferences(ApplicationConstants.SharedPreferenciesConstants.SP_FOR_DB_NAME,MODE_PRIVATE);
+        boolean isFirstLaunch = sp.getBoolean(IS_FIRST_LAUNCH_KEY, true);
+        sp.edit().putBoolean(IS_FIRST_LAUNCH_KEY,false).apply();
+        return isFirstLaunch;
+    }
+
     @Override
     protected void onResume(){
         super.onResume();
-        if(!mIsFirstLaunch) {
-            sortData();
-            RecyclerView.LayoutManager layoutManager = mLauncherRecyclerView.getLayoutManager();
-            if (layoutManager instanceof GridLayoutManager) {
-                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-                int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
-                ((GridLayoutManager) layoutManager).setSpanCount(spanCount);
-            }
+        sortData();
+        RecyclerView.LayoutManager layoutManager = mLauncherRecyclerView.getLayoutManager();
+        if (layoutManager instanceof GridLayoutManager) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
+            ((GridLayoutManager) layoutManager).setSpanCount(spanCount);
         }
+
     }
 
     @Override
@@ -287,15 +293,5 @@ public class MainLauncherActivity extends AppCompatActivity
         return true;
     }
 
-    private boolean checkIsWelcomePageNeeded(){
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean isWelcomePageNeeded = sp.getBoolean(SHOW_WELCOMEPAGE_KEY, true);
-        if(isWelcomePageNeeded) {
-
-            Intent intent = new Intent(this, AppWelcomeInfoActivity.class);
-            startActivity(intent);
-        }
-        return isWelcomePageNeeded;
-    }
 
 }

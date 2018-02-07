@@ -5,7 +5,7 @@
     <color name="colorAccentLight">#ff8133</color>
     <color name="colorGradientLight">#4DB6AC</color>
     <color name="white">#ffffff</color>
-    <color name="lightGray1">#ededed</color>
+    <color name="spashBackground">#74bcfc</color>
     <color name="lightGray2">#f3f3fc</color>
     <color name="darkAccent">#6b2447</color>
     <color name="darkPrimary">#4b4b89</color>

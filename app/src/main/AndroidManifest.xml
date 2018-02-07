@@ -21,19 +21,15 @@
             android:name="io.fabric.ApiKey"
             android:value="31180e98341589f1bc92f1205f76d0e0bd26be31" />
 
-        <activity android:name="welcomepage.AppWelcomeInfoActivity"></activity>
+        <activity android:name="welcomepage.AppWelcomeInfoActivity" />
+
         <activity
             android:name="launcher.MainLauncherActivity"
             android:label="Tseluiko"
             android:theme="@style/AppLightTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
 
-            </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.SettingActivity"
             android:label="@string/title_activity_preferencies"
@@ -41,15 +37,23 @@
 
         </activity>
 
-        <!-- <activity android:name=".activities.WelcomeActivity" -->
-        <!-- android:theme="@style/SplashTheme"> -->
-        <!-- </activity> -->
+         <activity android:name=".activities.SplashStartActivity"
+         android:theme="@style/SplashTheme">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+                 <category android:name="android.intent.category.HOME" />
+                 <category android:name="android.intent.category.DEFAULT" />
+
+             </intent-filter>
+
+
+         </activity>
 
         <activity
             android:name="launcher.IconExtendedInformationActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
-
-        <activity android:name="welcomepage.WelcomeSettingsActivity"></activity>
+        <activity android:name="welcomepage.WelcomeSettingsActivity" />
     </application>
 
 </manifest>
