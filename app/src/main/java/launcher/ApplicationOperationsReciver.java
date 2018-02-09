@@ -67,6 +67,7 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
                     adapter.data.remove(i);
                     adapter.notifyItemRemoved(i);
                     adapter.notifyItemRangeChanged(i, adapter.data.size());
+
                 }
             }
         }

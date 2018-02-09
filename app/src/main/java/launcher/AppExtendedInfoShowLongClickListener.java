@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.provider.Settings;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -30,8 +31,8 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
     public AppExtendedInfoShowLongClickListener(Context context, int viewPosition, LauncherRecyclerAbstractAdapter adapter) {
         this.context = context;
         this.viewPosition = viewPosition;
-        this.mData = adapter.getData();
         this.mAdapter = adapter;
+        this.mData = adapter.getData();
     }
 
     @Override
@@ -62,12 +63,16 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                         mAdapter.notifyItemRangeChanged(viewPosition, mData.size());
                         break;
                     case R.id.pop_menu_settings:
-                        Toast.makeText(context,"Эта штука ещё не реализована",Toast.LENGTH_SHORT).show();
+                        final Intent settingsIntent = new Intent();
+                        settingsIntent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", mData.get(viewPosition).getName(), null);
+                        settingsIntent.setData(uri);
+                        context.startActivity(settingsIntent);
                         break;
                     case R.id.pop_menu_info:
-                        Intent intent = new Intent(context, IconExtendedInformationActivity.class);
-                        intent.putExtra("appname", mData.get(viewPosition).getName());
-                        context.startActivity(intent);
+                        final Intent infoIntent = new Intent(context, IconExtendedInformationActivity.class);
+                        infoIntent.putExtra("appname", mData.get(viewPosition).getName());
+                        context.startActivity(infoIntent);
 
                         break;
                 }
