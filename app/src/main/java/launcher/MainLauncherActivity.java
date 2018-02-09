@@ -34,7 +34,6 @@ import com.tseluikoartem.ening.yandexmobdevproject.activities.DevProfileActivity
 import com.tseluikoartem.ening.yandexmobdevproject.activities.SettingActivity;
 
 import java.util.ArrayList;
-
 import java.util.List;
 import database.AppsDbHelper;
 import utils.ApplicationConstants;
