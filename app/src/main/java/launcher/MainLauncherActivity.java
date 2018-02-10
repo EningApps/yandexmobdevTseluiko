@@ -79,10 +79,13 @@ public class MainLauncherActivity extends AppCompatActivity
             mData = loadDataFromDB(mBdHelper, mPackageManager);
         }
 
+
+        mReciver = new ApplicationOperationsReciver();
+
         mLauncherRecyclerView = findViewById(R.id.louncher_content);
         mAdapter = createGridLayout();//в этом методе происходит получение ресивером адаптера
 
-        mReciver = new ApplicationOperationsReciver();
+
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -105,6 +108,7 @@ public class MainLauncherActivity extends AppCompatActivity
         mLauncherRecyclerView.setLayoutManager(gridLayoutManager);
         final IconRecycleAdapter iconRecycleAdapter = new IconRecycleAdapter(this.mData,mPackageManager,this,0);
         mLauncherRecyclerView.setAdapter(iconRecycleAdapter);
+        mReciver.setAdapter(iconRecycleAdapter);
         return iconRecycleAdapter;
     }
 
@@ -113,6 +117,7 @@ public class MainLauncherActivity extends AppCompatActivity
         mLauncherRecyclerView.setLayoutManager(layoutManager);
         final IconRecycleAdapter linearRecycleAdapter = new IconRecycleAdapter(this.mData,mPackageManager,this,1);
         mLauncherRecyclerView.setAdapter(linearRecycleAdapter);
+        mReciver.setAdapter(linearRecycleAdapter);
         return linearRecycleAdapter;
     }
 
@@ -266,6 +271,9 @@ public class MainLauncherActivity extends AppCompatActivity
         if (layoutManager instanceof GridLayoutManager) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
+            if(getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
+                spanCount += 2;
+            }
             ((GridLayoutManager) layoutManager).setSpanCount(spanCount);
         }
 

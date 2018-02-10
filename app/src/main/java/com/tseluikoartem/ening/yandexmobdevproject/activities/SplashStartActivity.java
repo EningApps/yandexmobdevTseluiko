@@ -23,7 +23,6 @@ public class SplashStartActivity extends AppCompatActivity {
         Intent intent = null;
         if(isWelcomePageNeeded){
              intent = new Intent(this, AppWelcomeInfoActivity.class);
-             sp.edit().putBoolean(SHOW_WELCOMEPAGE_KEY,false).apply();
         }else{
             intent = new Intent(this, MainLauncherActivity.class);
         }

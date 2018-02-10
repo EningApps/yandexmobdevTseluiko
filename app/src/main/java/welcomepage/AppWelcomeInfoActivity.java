@@ -31,7 +31,6 @@ public class AppWelcomeInfoActivity extends AppCompatActivity{
         mImageViewAppIcon =(ImageView)findViewById(R.id.imageViewAppIcon);
         mImageViewAppIcon.setImageBitmap(ImageViewRounder.getRoundedBitmap(bitmap));
 
-
         mGoToAppButton = findViewById(R.id.buttonToApp);
         mGoToSettingsButton = findViewById(R.id.buttonToSettings);
         mGoToSettingsButton.setOnClickListener(new View.OnClickListener() {
