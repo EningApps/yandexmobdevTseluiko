@@ -10,7 +10,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppDarkTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <style name="AppDarkTheme" parent="android:Theme.Holo">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/darkTheme</item>
         <item name="colorPrimaryDark">@color/darkPrimary</item>

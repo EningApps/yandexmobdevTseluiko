@@ -20,7 +20,6 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
         String action = intent.getAction();
         String appPackage = intent.getDataString();
 
-
         if(action.equals("android.intent.action.PACKAGE_ADDED")){
             PackageManager packageManager = context.getPackageManager();
             ApplicationInfo appInfo=null;
@@ -50,23 +49,23 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
                 appModel.setName(appName);
                 appModel.setIcon(appIcon);
                 appModel.setLabel(appLabel);
-                adapter.data.add(appModel);
+                adapter.getData().add(appModel);
                 adapter.notifyDataSetChanged();
-                adapter.notifyItemRangeChanged(0, adapter.data.size());
+                adapter.notifyItemRangeChanged(0, adapter.getData().size());
             }
         }else if(action.equals("android.intent.action.PACKAGE_REMOVED")){
-            for (int i = 0; i < adapter.data.size(); i++) {
-                Log.d("RECIVER", "appname - " +adapter.data.get(i).getName());
-                if(appPackage.contains(adapter.data.get(i).getName())){
-                    String appName = adapter.data.get(i).getName();
+            for (int i = 0; i < adapter.getData().size(); i++) {
+                Log.d("RECIVER", "appname - " +adapter.getData().get(i).getName());
+                if(appPackage.contains(adapter.getData().get(i).getName())){
+                    String appName = adapter.getData().get(i).getName();
                     AppsDbHelper dbHelper = new AppsDbHelper(context);
                     SQLiteDatabase database = dbHelper.getWritableDatabase();
                     database.delete(AppsDbHelper.appsDatabase.TABLE_NAME,
                             AppsDbHelper.appsDatabase.Columns.COLUMN_APP_NAME
                                         + " = '" +appName+"'",null);
-                    adapter.data.remove(i);
+                    adapter.getData().remove(i);
                     adapter.notifyItemRemoved(i);
-                    adapter.notifyItemRangeChanged(i, adapter.data.size());
+                    adapter.notifyItemRangeChanged(i, adapter.getData().size());
 
                 }
             }
