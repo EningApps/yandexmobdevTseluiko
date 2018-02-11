@@ -1,6 +1,7 @@
 package welcomepage;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
+
+import backgroundimage.ImagesLoadedReciver;
 
 
 public class WelcomeGuideFragment extends Fragment {
@@ -50,6 +53,5 @@ public class WelcomeGuideFragment extends Fragment {
         super.onDetach();
 
     }
-
 
 }

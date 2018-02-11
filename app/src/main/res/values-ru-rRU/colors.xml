@@ -11,4 +11,5 @@
     <color name="darkPrimary">#4b4b89</color>
     <color name="darkTheme">#343443</color>
     <color name="recyclerDark">#810004</color>
+    <color name="transparent">#82ffffff</color>
 </resources>

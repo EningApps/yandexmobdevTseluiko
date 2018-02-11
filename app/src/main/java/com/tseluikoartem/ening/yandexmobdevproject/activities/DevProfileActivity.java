@@ -148,7 +148,8 @@ public class DevProfileActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        // ... your own onResume implementation
+
+
         checkForCrashes();
     }
 
