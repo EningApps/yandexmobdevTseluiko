@@ -13,6 +13,7 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
+import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
@@ -50,6 +51,10 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                             Toast.makeText(context,"Нельзя удалить это произведение кодингого искусства",Toast.LENGTH_LONG).show();
                             break;
                         }
+
+                        String eventDetete = "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
+                        YandexMetrica.reportEvent("Было удалено приложение", eventDetete);
+
                         Intent delIntent = new Intent(Intent.ACTION_DELETE);
                         delIntent.setData(Uri.parse("package:"+ mData.get(viewPosition).getName()));
                         context.startActivity(delIntent);
@@ -68,11 +73,18 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                         Uri uri = Uri.fromParts("package", mData.get(viewPosition).getName(), null);
                         settingsIntent.setData(uri);
                         context.startActivity(settingsIntent);
+
+                        String eventSetngs= "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
+                        YandexMetrica.reportEvent("Был произведён переход в системные настройки", eventSetngs);
+
                         break;
                     case R.id.pop_menu_info:
                         final Intent infoIntent = new Intent(context, IconExtendedInformationActivity.class);
                         infoIntent.putExtra("appname", mData.get(viewPosition).getName());
                         context.startActivity(infoIntent);
+
+                        String eventInfo = "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
+                        YandexMetrica.reportEvent("Была показана доп. информация", eventInfo);
 
                         break;
                 }

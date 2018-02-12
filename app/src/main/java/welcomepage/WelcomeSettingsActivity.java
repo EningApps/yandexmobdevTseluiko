@@ -11,9 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
 
-import backgroundimage.BackgroundImageAsyncChanger;
+import backgroundimage.ImagesLoadedReciver;
 
 import static utils.ApplicationConstants.SharedPreferenciesConstants.*;
 
@@ -26,7 +25,6 @@ public class WelcomeSettingsActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private FragmentPagerAdapter mFragmentPagerAdapter;
 
-    private int mGridSpanCount=4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +71,8 @@ public class WelcomeSettingsActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         final View rootView = findViewById(R.id.root_welcome_settings_layout);
-        final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
-        if(imagesFileNames!=null){
-            new BackgroundImageAsyncChanger(rootView,this,1).execute(imagesFileNames);
-        }
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        imagesLoadedReciver.registerBackground(rootView);
         super.onResume();
     }
 
@@ -87,7 +83,6 @@ public class WelcomeSettingsActivity extends AppCompatActivity
 
     @Override
     public void onMaketTypeChange(int spanCount) {
-        this.mGridSpanCount = spanCount;
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         sp.edit().putString(MAKET_TYPE_KEY, String.valueOf(spanCount)).apply();
 

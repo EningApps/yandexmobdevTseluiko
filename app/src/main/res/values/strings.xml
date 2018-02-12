@@ -118,4 +118,5 @@
     <string name="gridType">Сетка</string>
     <string name="listType">Список</string>
     <string name="settings">Настройки</string>
+    <string name="isRandomImage">Установить одинаковые картинки на фон</string>
 </resources>

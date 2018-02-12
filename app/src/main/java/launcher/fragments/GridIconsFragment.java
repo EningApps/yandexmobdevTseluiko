@@ -9,15 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
 
-import backgroundimage.BackgroundImageAsyncChanger;
+import backgroundimage.ImagesLoadedReciver;
 
 
 public class GridIconsFragment extends LauncherAbstractFragment {
 
     private RecyclerView mRecyclerView;
-    private View mRootLayout;
+    private View mRootView;
     private OnFragmentsContentInteractionListener mListener;
 
     public GridIconsFragment() {
@@ -37,10 +36,8 @@ public class GridIconsFragment extends LauncherAbstractFragment {
 
     @Override
     public void onResume() {
-        final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
-        if(imagesFileNames!=null){
-            new BackgroundImageAsyncChanger(mRootLayout,getActivity(),2).execute(imagesFileNames);
-        }
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        imagesLoadedReciver.registerBackground(mRootView);
         super.onResume();
 
     }
@@ -51,7 +48,7 @@ public class GridIconsFragment extends LauncherAbstractFragment {
         final View layout = inflater.inflate(R.layout.fragment_icons_grid_layout, container, false);
         mRecyclerView = layout.findViewById(R.id.fragment_grid_recycler_view);
         mListener.setRecyclerViewComponents(mRecyclerView,0);
-        mRootLayout = layout;
+        mRootView = layout;
         return  layout;
     }
 

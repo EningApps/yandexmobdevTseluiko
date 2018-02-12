@@ -8,16 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
 
-import backgroundimage.BackgroundImageAsyncChanger;
+import backgroundimage.ImagesLoadedReciver;
 
 
 public class ListIconsFragment extends LauncherAbstractFragment {
 
 
     private RecyclerView mRecyclerView;
-    private View mRootLayout;
+    private View mRootView;
     private OnFragmentsContentInteractionListener mListener;
 
     public ListIconsFragment() {
@@ -43,7 +42,7 @@ public class ListIconsFragment extends LauncherAbstractFragment {
         final View layout = inflater.inflate(R.layout.fragment_icons_list_layout, container, false);
         mRecyclerView = layout.findViewById(R.id.fragment_list_recycler_view);
         mListener.setRecyclerViewComponents(mRecyclerView,1);
-        mRootLayout = layout;
+        mRootView = layout;
         return  layout;
     }
 
@@ -62,11 +61,8 @@ public class ListIconsFragment extends LauncherAbstractFragment {
 
     @Override
     public void onResume() {
-
-        final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
-        if(imagesFileNames!=null){
-            new BackgroundImageAsyncChanger(mRootLayout,getActivity(),3).execute(imagesFileNames);
-        }
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        imagesLoadedReciver.registerBackground(mRootView);
         super.onResume();
     }
 

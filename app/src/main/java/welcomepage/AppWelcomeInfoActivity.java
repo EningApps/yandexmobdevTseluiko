@@ -13,9 +13,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
+import com.yandex.metrica.YandexMetrica;
 
-import backgroundimage.BackgroundImageAsyncChanger;
+import backgroundimage.ImagesLoadedReciver;
 import launcher.MainLauncherActivity;
 
 import utils.ImageViewRounder;
@@ -44,6 +44,9 @@ public class AppWelcomeInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Intent intent = new Intent(getApplicationContext(),WelcomeSettingsActivity.class);
+
+                YandexMetrica.reportEvent("Был произведён переход в \"Гайд и настройки\"");
+
                 startActivity(intent);
             }
         });
@@ -53,9 +56,11 @@ public class AppWelcomeInfoActivity extends AppCompatActivity {
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 sp.edit().putBoolean(SHOW_WELCOMEPAGE_KEY, false).apply();
                 final Intent intent = new Intent(getApplicationContext(),MainLauncherActivity.class);
+
                 startActivity(intent);
             }
         });
+
 
 
     }
@@ -64,10 +69,8 @@ public class AppWelcomeInfoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         final View rootView = findViewById(R.id.root_app_info_layout);
-        final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
-        if(imagesFileNames!=null){
-            new BackgroundImageAsyncChanger(rootView,this,0).execute(imagesFileNames);
-        }
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        imagesLoadedReciver.registerBackground(rootView);
         super.onResume();
     }
 

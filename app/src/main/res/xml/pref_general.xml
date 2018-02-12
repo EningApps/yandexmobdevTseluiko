@@ -14,11 +14,17 @@
         android:entryValues="@array/theme_type"
         android:dialogTitle="@string/dialog_title_theme_pref" />
     <ListPreference
-        android:key="sort_key"
-        android:title="@string/appSort"
-        android:entries="@array/sort_type"
-        android:entryValues="@array/sort_number"
-        android:dialogTitle="@string/chooseSort" />
+    android:key="sort_key"
+    android:title="@string/appSort"
+    android:entries="@array/sort_type"
+    android:entryValues="@array/sort_number"
+    android:dialogTitle="@string/chooseSort" />
+
+    <CheckBoxPreference
+        android:key="is_random_image"
+        android:title="@string/isRandomImage"
+        android:defaultValue="false"/>
+
 
     <CheckBoxPreference
         android:key="show_welcomepage"

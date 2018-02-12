@@ -7,6 +7,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentFilter;
 
+import com.yandex.metrica.YandexMetrica;
+
 import backgroundimage.ImageLoadJobService;
 import backgroundimage.ImagesLoadedReciver;
 import utils.ApplicationConstants;
@@ -17,14 +19,17 @@ import static utils.ApplicationConstants.BackgroundImagesConstants.JOB_ID_LOAD_I
  * Created by ening on 11.02.18.
  */
 
-public class LauncherApplication extends Application implements ImagesLoadedReciver.ImagesContainer {
+public class LauncherApplication extends Application  {
 
     private String[] imagesFileNames;
-    private static LauncherApplication lSauncherApplication;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        YandexMetrica.activate(getApplicationContext(), ApplicationConstants.YandexAppMetricaConstants.API_KEY);
+        YandexMetrica.enableActivityAutoTracking(this);
+        YandexMetrica.reportEvent("Лаунчер был запущен");
 
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (jobScheduler != null) {
@@ -32,29 +37,14 @@ public class LauncherApplication extends Application implements ImagesLoadedReci
                     new JobInfo.Builder(JOB_ID_LOAD_IMAGE,
                             new ComponentName(getApplicationContext(), ImageLoadJobService.class))
                             .setOverrideDeadline(0L)
+                         //   .setPeriodic(90005)
                             .build()
             );
         }
-        ImagesLoadedReciver imagesReciver = new ImagesLoadedReciver();
-        imagesReciver.setImagesContainer(this);
+        ImagesLoadedReciver imagesReciver = ImagesLoadedReciver.getInstance();
+
         registerReceiver(imagesReciver,
                 new IntentFilter(ApplicationConstants.BackgroundImagesConstants.BROADCAST_ACTION_IMAGES_LOADED));
 
-        lSauncherApplication = this;
-
-    }
-
-    public static LauncherApplication getInstance(){
-        return lSauncherApplication;
-
-    }
-
-    @Override
-    public void setImages(String[] images) {
-        this.imagesFileNames = images;
-    }
-
-    public String[] getImagesFileNames() {
-        return imagesFileNames;
     }
 }
