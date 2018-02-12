@@ -3,8 +3,7 @@ package backgroundimage;
 import android.app.job.JobParameters;
 import android.app.job.JobService;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.text.TextUtils;
+
 
 import java.util.List;
 
@@ -25,18 +24,14 @@ public class ImageLoadJobService extends JobService {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    final List<String> imageUrls = mImageLoader.getImageUrls();
-                    final String[] imagesNames = new String[imageUrls.size()];
-                    for (int i = 0; i < imageUrls.size(); i++) {
-                        if (TextUtils.isEmpty(imageUrls.get(i)) == false) {
-                            final Bitmap bitmap = mImageLoader.loadBitmap(imageUrls.get(i));
-                            final String imageName = "BackgroundImage"+i+".png";
-                            ImageFileOperator.getInstance().saveImage(getApplicationContext(), bitmap, imageName);
-                            imagesNames[i]=imageName;
-                        }
+                    final List<String> loadedUrls = mImageLoader.getImageUrls();
+                    final String[] imagesUrls = new String[loadedUrls.size()];
+                    for (int i = 0; i < loadedUrls.size(); i++) {
+                        imagesUrls[i]=loadedUrls.get(i);
                     }
+
                     final Intent broadcastIntent = new Intent(BROADCAST_ACTION_IMAGES_LOADED);
-                    broadcastIntent.putExtra(BROADCAST_PARAM_IMAGES_NAMES, imagesNames);
+                    broadcastIntent.putExtra(BROADCAST_PARAM_IMAGES_NAMES, imagesUrls);
                     sendBroadcast(broadcastIntent);
                     jobFinished(params, false);
                 }

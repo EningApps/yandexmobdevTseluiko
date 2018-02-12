@@ -36,15 +36,7 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
                 String appName = appInfo.packageName;
                 String appLabel = (String) appInfo.loadLabel(packageManager);
                 Drawable appIcon = appInfo.loadIcon(packageManager);
-                String appPermission = appInfo.publicSourceDir;
-                int appLaunchesCount = 0;
-                long appInstalledTime = 0;
-                try {
-                    appInstalledTime = packageManager.getPackageInfo(appInfo.packageName,0).firstInstallTime;
-                } catch (PackageManager.NameNotFoundException e) {
-                    Log.d("APPMODEl","Not found");
-                }
-                dbHelper.insertAppRecord(dbHelper.getWritableDatabase(),appName,appLabel,appPermission,appLaunchesCount,appInstalledTime);
+
 
                 appModel.setName(appName);
                 appModel.setIcon(appIcon);

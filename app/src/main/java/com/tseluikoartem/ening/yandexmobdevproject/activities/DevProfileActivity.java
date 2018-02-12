@@ -20,8 +20,9 @@ import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
+import com.yandex.metrica.YandexMetrica;
 
-import backgroundimage.BackgroundImageAsyncChanger;
+import backgroundimage.ImagesLoadedReciver;
 import io.fabric.sdk.android.Fabric;
 import utils.ImageViewRounder;
 
@@ -51,6 +52,9 @@ public class DevProfileActivity extends AppCompatActivity {
         else if(themeType.equals(THEME_DARK)) {
             setTheme(R.style.AppDarkTheme);
         }
+
+        YandexMetrica.reportEvent("Был выполнен переход в ProfileActivity");
+
 
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
@@ -150,11 +154,8 @@ public class DevProfileActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         final View rootView = findViewById(R.id.dev_prof_root_layout);
-        final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
-        if(imagesFileNames!=null){
-            new BackgroundImageAsyncChanger(rootView,this,4).execute(imagesFileNames);
-        }
-
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        imagesLoadedReciver.registerBackground(rootView);
         checkForCrashes();
     }
 

@@ -29,7 +29,6 @@ public class IconsAmountSettingsFragment extends Fragment {
     private RadioButton mStandartMaketButton;
 
 
-
     public IconsAmountSettingsFragment() {
         // Required empty public constructor
     }
@@ -94,6 +93,7 @@ public class IconsAmountSettingsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
         mStandartMaketField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +103,24 @@ public class IconsAmountSettingsFragment extends Fragment {
             }
         });
         mLargeMaketField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLargeMaketButton.setChecked(true);
+                mStandartMaketButton.setChecked(false);
+                mListener.onMaketTypeChange(5);
+            }
+        });
+
+        mStandartMaketButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mStandartMaketButton.setChecked(true);
+                mLargeMaketButton.setChecked(false);
+                mListener.onMaketTypeChange(4);
+            }
+        });
+
+        mLargeMaketButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mLargeMaketButton.setChecked(true);

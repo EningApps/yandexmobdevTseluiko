@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.DevProfileActivity;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.SettingActivity;
+import com.yandex.metrica.YandexMetrica;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,9 +81,12 @@ public class MainLauncherActivity extends AppCompatActivity
         mBdHelper = new AppsDbHelper(this);
         if(mIsFirstLaunch) {
             mData = loadDataFromSystem(mBdHelper, mPackageManager);
+            YandexMetrica.reportEvent("Данные были загружены из системы");
         }
         else {
             mData = loadDataFromDB(mBdHelper, mPackageManager);
+            YandexMetrica.reportEvent("Данные были загружены из базы");
+
         }
 
         mReciver = new ApplicationOperationsReciver();
@@ -239,9 +243,12 @@ public class MainLauncherActivity extends AppCompatActivity
         String themeType = sp.getString(THEME_CHOICE_KEY, THEME_LIGHT);
         if(themeType.equals(THEME_LIGHT)) {
             setTheme(R.style.AppLightTheme);
+            YandexMetrica.reportEvent("Была установлена светлая тема");
+
         }
         else if(themeType.equals(THEME_DARK)) {
             setTheme(R.style.AppDarkTheme);
+            YandexMetrica.reportEvent("Была установлена тёмная тема");
         }
     }
 
@@ -254,6 +261,9 @@ public class MainLauncherActivity extends AppCompatActivity
 
     @Override
     protected void onResume(){
+
+        YandexMetrica.reportEvent("Был произведён переход к главной странице лаунчера");
+
         super.onResume();
         sortData();
         RecyclerView.LayoutManager layoutManager = mFragments.get(0).getRecyclerView().getLayoutManager();
@@ -262,10 +272,12 @@ public class MainLauncherActivity extends AppCompatActivity
             int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
             if(getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
                 spanCount += 2;
+                YandexMetrica.reportEvent("Устройство было переведено в landscape режим");
             }
+            YandexMetrica.reportEvent("Устройство было переведено в портретный режим");
+
             ((GridLayoutManager) layoutManager).setSpanCount(spanCount);
         }
-
     }
 
     @Override
@@ -282,6 +294,10 @@ public class MainLauncherActivity extends AppCompatActivity
             recyclerView.addItemDecoration(new OffsetItemDecoration(offset));
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
+
+            String spanCountParams = "{\"name\":"+spanCount+"}";
+            YandexMetrica.reportEvent("Было удалено приложение", spanCountParams);
+
             if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
                 spanCount += 2;
             }
@@ -303,10 +319,16 @@ public class MainLauncherActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.nav_launcher) {
             setLauncherFragment(mFragments.get(0));
+            YandexMetrica.reportEvent("Был выбран режим \"Сетка\"");
+
         } else if (id == R.id.nav_list) {
             setLauncherFragment(mFragments.get(1));
+            YandexMetrica.reportEvent("Был выбран режим \"Список\"");
+
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingActivity.class));
+            YandexMetrica.reportEvent("Был выполнен переход в настройки");
+
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_launcher_activity);
         drawer.closeDrawer(GravityCompat.START);
