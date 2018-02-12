@@ -2,8 +2,7 @@ package backgroundimage;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -35,10 +34,9 @@ class ImageLoader {
             if (parser.getEventType() == XmlPullParser.START_TAG
                     && "img".equals(parser.getName())) {
                 for (int i = 1; i < parser.getAttributeCount(); i++) {
-                    if ("size".equals(parser.getAttributeName(i))) {
-                        if ("XXXL".equals(parser.getAttributeValue(i))) {
-                            return parser.getAttributeValue(i-1);
-                        }
+                    if ("size".equals(parser.getAttributeName(i))
+                            && "XXXL".equals(parser.getAttributeValue(i))) {
+                        return parser.getAttributeValue(i-1);
                     }
                 }
             }
@@ -64,7 +62,6 @@ class ImageLoader {
             byte [] bitmap = buffer.toByteArray();
             return BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return null;
     }
@@ -100,7 +97,7 @@ class ImageLoader {
                     }
                 }
             } catch (IOException | XmlPullParserException e) {
-                e.printStackTrace();
+                
             }
         }
 

@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
 
-import backgroundimage.LauncherBackgroundChanger;
+import backgroundimage.BackgroundImageAsyncChanger;
 import launcher.MainLauncherActivity;
 
 import utils.ImageViewRounder;
@@ -66,7 +66,7 @@ public class AppWelcomeInfoActivity extends AppCompatActivity {
         final View rootView = findViewById(R.id.root_app_info_layout);
         final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
         if(imagesFileNames!=null){
-            new LauncherBackgroundChanger(rootView,this,0).execute(imagesFileNames);
+            new BackgroundImageAsyncChanger(rootView,this,0).execute(imagesFileNames);
         }
         super.onResume();
     }

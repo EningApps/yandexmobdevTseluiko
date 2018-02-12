@@ -5,22 +5,20 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import java.util.Random;
 
 /**
  * Created by ening on 11.02.18.
  */
 
-public class LauncherBackgroundChanger extends AsyncTask<String, Void ,Drawable> {
+public class BackgroundImageAsyncChanger extends AsyncTask<String, Void ,Drawable> {
 
     private int pictureNumber;
     private View backgroundView;
     private Context context;
 
-    public LauncherBackgroundChanger(View backgroundView, Context context, int pictureNumber) {
+    public BackgroundImageAsyncChanger(View backgroundView, Context context, int pictureNumber) {
         this.backgroundView = backgroundView;
         this.context = context;
         this.pictureNumber = pictureNumber;

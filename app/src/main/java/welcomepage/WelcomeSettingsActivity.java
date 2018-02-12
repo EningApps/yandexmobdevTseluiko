@@ -1,7 +1,6 @@
 package welcomepage;
 
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -14,8 +13,7 @@ import android.view.View;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
 
-import backgroundimage.ImagesLoadedReciver;
-import backgroundimage.LauncherBackgroundChanger;
+import backgroundimage.BackgroundImageAsyncChanger;
 
 import static utils.ApplicationConstants.SharedPreferenciesConstants.*;
 
@@ -77,7 +75,7 @@ public class WelcomeSettingsActivity extends AppCompatActivity
         final View rootView = findViewById(R.id.root_welcome_settings_layout);
         final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
         if(imagesFileNames!=null){
-            new LauncherBackgroundChanger(rootView,this,1).execute(imagesFileNames);
+            new BackgroundImageAsyncChanger(rootView,this,1).execute(imagesFileNames);
         }
         super.onResume();
     }

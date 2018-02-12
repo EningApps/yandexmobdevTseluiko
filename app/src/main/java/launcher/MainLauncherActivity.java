@@ -1,6 +1,5 @@
 package launcher;
 
-import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -28,19 +27,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.DevProfileActivity;
-import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import backgroundimage.LauncherBackgroundChanger;
 import database.AppsDbHelper;
 import launcher.fragments.GridIconsFragment;
 import launcher.fragments.LauncherAbstractFragment;

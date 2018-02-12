@@ -2,7 +2,6 @@ package launcher.fragments;
 
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,13 +11,13 @@ import android.view.ViewGroup;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
 
-import backgroundimage.ImagesLoadedReciver;
-import backgroundimage.LauncherBackgroundChanger;
+import backgroundimage.BackgroundImageAsyncChanger;
 
 
 public class GridIconsFragment extends LauncherAbstractFragment {
 
     private RecyclerView mRecyclerView;
+    private View mRootLayout;
     private OnFragmentsContentInteractionListener mListener;
 
     public GridIconsFragment() {
@@ -40,7 +39,7 @@ public class GridIconsFragment extends LauncherAbstractFragment {
     public void onResume() {
         final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
         if(imagesFileNames!=null){
-            new LauncherBackgroundChanger(mRecyclerView,getActivity(),2).execute(imagesFileNames);
+            new BackgroundImageAsyncChanger(mRootLayout,getActivity(),2).execute(imagesFileNames);
         }
         super.onResume();
 
@@ -49,9 +48,11 @@ public class GridIconsFragment extends LauncherAbstractFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mRecyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_icons_grid_layout, container, false);
+        final View layout = inflater.inflate(R.layout.fragment_icons_grid_layout, container, false);
+        mRecyclerView = layout.findViewById(R.id.fragment_grid_recycler_view);
         mListener.setRecyclerViewComponents(mRecyclerView,0);
-        return mRecyclerView;
+        mRootLayout = layout;
+        return  layout;
     }
 
     @Override

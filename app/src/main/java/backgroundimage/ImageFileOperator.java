@@ -38,14 +38,12 @@ class ImageFileOperator {
             fileOutputStream = new FileOutputStream(createFile(context, fileName));
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (fileOutputStream != null) {
                     fileOutputStream.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -62,14 +60,12 @@ class ImageFileOperator {
             inputStream = new FileInputStream(createFile(context, fileName));
             return BitmapFactory.decodeStream(inputStream);
         } catch (Exception e) {
-            e.printStackTrace();
         } finally {
             try {
                 if (inputStream != null) {
                     inputStream.close();
                 }
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         return null;

@@ -20,7 +20,7 @@ import static utils.ApplicationConstants.BackgroundImagesConstants.JOB_ID_LOAD_I
 public class LauncherApplication extends Application implements ImagesLoadedReciver.ImagesContainer {
 
     private String[] imagesFileNames;
-    private static LauncherApplication launcherApplication;
+    private static LauncherApplication lSauncherApplication;
 
     @Override
     public void onCreate() {
@@ -40,12 +40,12 @@ public class LauncherApplication extends Application implements ImagesLoadedReci
         registerReceiver(imagesReciver,
                 new IntentFilter(ApplicationConstants.BackgroundImagesConstants.BROADCAST_ACTION_IMAGES_LOADED));
 
-        launcherApplication = this;
+        lSauncherApplication = this;
 
     }
 
     public static LauncherApplication getInstance(){
-        return launcherApplication;
+        return lSauncherApplication;
 
     }
 

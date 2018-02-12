@@ -33,17 +33,12 @@ public interface ApplicationConstants {
 
     public interface BackgroundImagesConstants{
         public static final String YANDEX_FOTKI_URL = "http://api-fotki.yandex.ru/api/podhistory/poddate;";
-        public static final String YANDEX_FOTKI_DATE_RULE = "T12:00:00Z/?limit=4";
+        public static final String YANDEX_FOTKI_DATE_RULE = "T12:00:00Z/?limit=5";
 
         public static final int JOB_ID_LOAD_IMAGE = 181999234;
         public static final String BROADCAST_ACTION_IMAGES_LOADED = "com.tseluikoartem.yandexmobdev.IMAGES_LOADED";
         public static final String BROADCAST_PARAM_IMAGES_NAMES = "com.tseluikoartem.yandexmobdev.IMAGES_NAMES";
 
 
-
-
     }
-
-
-
 }
