@@ -1,5 +1,6 @@
 package launcher;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -35,7 +36,12 @@ import com.tseluikoartem.ening.yandexmobdevproject.activities.SettingActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import database.AppsDbHelper;
+import launcher.fragments.GridIconsFragment;
+import launcher.fragments.LauncherAbstractFragment;
+import launcher.fragments.ListIconsFragment;
+import launcher.fragments.OnFragmentsContentInteractionListener;
 import utils.ApplicationConstants;
 import utils.ImageViewRounder;
 
@@ -48,12 +54,12 @@ import static utils.ApplicationConstants.SharedPreferenciesConstants.THEME_DARK;
 import static utils.ApplicationConstants.SharedPreferenciesConstants.THEME_LIGHT;
 
 public class MainLauncherActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, OnFragmentsContentInteractionListener {
 
     private boolean mIsFirstLaunch;
     private ApplicationOperationsReciver mReciver;
     private List<AppModel> mData;
-    private RecyclerView mLauncherRecyclerView;
+    private List<LauncherAbstractFragment> mFragments;
     private AppsDbHelper mBdHelper;
     private PackageManager mPackageManager;
     private LauncherRecyclerAbstractAdapter mAdapter;
@@ -79,13 +85,16 @@ public class MainLauncherActivity extends AppCompatActivity
             mData = loadDataFromDB(mBdHelper, mPackageManager);
         }
 
-
         mReciver = new ApplicationOperationsReciver();
 
-        mLauncherRecyclerView = findViewById(R.id.louncher_content);
-        mAdapter = createGridLayout();//в этом методе происходит получение ресивером адаптера
+        mFragments = new ArrayList<>();
+        final GridIconsFragment gridIconsFragment = GridIconsFragment.newInstance();
+        final ListIconsFragment listIconsFragment = ListIconsFragment.newInstance();
+        mFragments.add(gridIconsFragment);
+        mFragments.add(listIconsFragment);
+        setLauncherFragment(gridIconsFragment);
 
-
+        mReciver.setAdapter(mAdapter);
 
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -96,30 +105,6 @@ public class MainLauncherActivity extends AppCompatActivity
     }
 
 
-    private LauncherRecyclerAbstractAdapter createGridLayout() {
-        final int offset = 8;
-        mLauncherRecyclerView.addItemDecoration(new OffsetItemDecoration(offset));
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY,"4"));
-        if(getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
-            spanCount += 2;
-        }
-        final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, spanCount);
-        mLauncherRecyclerView.setLayoutManager(gridLayoutManager);
-        final IconRecycleAdapter iconRecycleAdapter = new IconRecycleAdapter(this.mData,mPackageManager,this,0);
-        mLauncherRecyclerView.setAdapter(iconRecycleAdapter);
-        mReciver.setAdapter(iconRecycleAdapter);
-        return iconRecycleAdapter;
-    }
-
-    private LauncherRecyclerAbstractAdapter createLinearLayout() {
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        mLauncherRecyclerView.setLayoutManager(layoutManager);
-        final IconRecycleAdapter linearRecycleAdapter = new IconRecycleAdapter(this.mData,mPackageManager,this,1);
-        mLauncherRecyclerView.setAdapter(linearRecycleAdapter);
-        mReciver.setAdapter(linearRecycleAdapter);
-        return linearRecycleAdapter;
-    }
 
     private List<AppModel> loadDataFromDB(AppsDbHelper dbHelper,PackageManager packageManager){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -145,7 +130,6 @@ public class MainLauncherActivity extends AppCompatActivity
     }
 
     private List<AppModel> loadDataFromSystem(AppsDbHelper dbHelper, PackageManager packageManager) {
-
         List<AppModel> apps = new ArrayList<>();
         List<ApplicationInfo> avalibleActivities = packageManager.getInstalledApplications(0);
         for(ApplicationInfo appInfo: avalibleActivities){
@@ -203,6 +187,11 @@ public class MainLauncherActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+    }
+
+    private void setLauncherFragment(LauncherAbstractFragment fragment){
+        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentsContainer,fragment).commit();
     }
 
     private void sortData(){
@@ -267,7 +256,7 @@ public class MainLauncherActivity extends AppCompatActivity
     protected void onResume(){
         super.onResume();
         sortData();
-        RecyclerView.LayoutManager layoutManager = mLauncherRecyclerView.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = mFragments.get(0).getRecyclerView().getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
             int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
@@ -286,12 +275,36 @@ public class MainLauncherActivity extends AppCompatActivity
     }
 
     @Override
+    public void setRecyclerViewComponents(RecyclerView recyclerView, int layoutType) {
+        RecyclerView.LayoutManager layoutManager = null;
+        if(layoutType==0) {
+            final int offset = 8;
+            recyclerView.addItemDecoration(new OffsetItemDecoration(offset));
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+            int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
+            if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
+                spanCount += 2;
+            }
+            layoutManager = new GridLayoutManager(this, spanCount);
+            mAdapter = new IconRecycleAdapter(this.mData, mPackageManager, this, 0);
+
+        }else if(layoutType==1) {
+            layoutManager = new LinearLayoutManager(this);
+            mAdapter= new IconRecycleAdapter(this.mData, mPackageManager, this, 1);
+
+        }
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(mAdapter);
+        mReciver.setAdapter(mAdapter);
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_launcher) {
-            mAdapter = createGridLayout();
+            setLauncherFragment(mFragments.get(0));
         } else if (id == R.id.nav_list) {
-            mAdapter = createLinearLayout();
+            setLauncherFragment(mFragments.get(1));
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingActivity.class));
         }

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.crashlytics.android.Crashlytics;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 
+import backgroundimage.BackgroundImageAsyncChanger;
 import io.fabric.sdk.android.Fabric;
 import utils.ImageViewRounder;
 
@@ -148,7 +149,12 @@ public class DevProfileActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        // ... your own onResume implementation
+        final View rootView = findViewById(R.id.dev_prof_root_layout);
+        final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
+        if(imagesFileNames!=null){
+            new BackgroundImageAsyncChanger(rootView,this,4).execute(imagesFileNames);
+        }
+
         checkForCrashes();
     }
 

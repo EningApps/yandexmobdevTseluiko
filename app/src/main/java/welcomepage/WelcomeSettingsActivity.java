@@ -8,8 +8,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
+import com.tseluikoartem.ening.yandexmobdevproject.activities.LauncherApplication;
+
+import backgroundimage.BackgroundImageAsyncChanger;
+
 import static utils.ApplicationConstants.SharedPreferenciesConstants.*;
 
 public class WelcomeSettingsActivity extends AppCompatActivity
@@ -66,6 +71,16 @@ public class WelcomeSettingsActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        final View rootView = findViewById(R.id.root_welcome_settings_layout);
+        final String[] imagesFileNames = LauncherApplication.getInstance().getImagesFileNames();
+        if(imagesFileNames!=null){
+            new BackgroundImageAsyncChanger(rootView,this,1).execute(imagesFileNames);
+        }
+        super.onResume();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
     }
@@ -84,4 +99,6 @@ public class WelcomeSettingsActivity extends AppCompatActivity
         sp.edit().putString(THEME_CHOICE_KEY,themeType).apply();
         recreate();
     }
+
+
 }

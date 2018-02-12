@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 
 
+
 public class WelcomeGuideFragment extends Fragment {
 
 
@@ -50,6 +51,5 @@ public class WelcomeGuideFragment extends Fragment {
         super.onDetach();
 
     }
-
 
 }

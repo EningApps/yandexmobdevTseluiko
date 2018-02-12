@@ -48,7 +48,7 @@ android {
         minSdkVersion 22
         targetSdkVersion 26
         versionCode 1
-        versionName "2.0.2"
+        versionName "3.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b47357324b947eba1dfd8980363bc16"]
     }
@@ -140,6 +140,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
+    compile 'com.yandex.android:mobmetricalib:2.80'
     implementation 'com.android.support:cardview-v7:26.1.0'
     compile 'net.hockeyapp.android:HockeySDK:5.1.0'
     compile('com.crashlytics.sdk.android:crashlytics:2.8.0@aar') {
