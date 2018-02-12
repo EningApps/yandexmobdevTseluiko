@@ -51,6 +51,10 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                             Toast.makeText(context,"Нельзя удалить это произведение кодингого искусства",Toast.LENGTH_LONG).show();
                             break;
                         }
+
+                        String eventDetete = "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
+                        YandexMetrica.reportEvent("Было удалено приложение", eventDetete);
+
                         Intent delIntent = new Intent(Intent.ACTION_DELETE);
                         delIntent.setData(Uri.parse("package:"+ mData.get(viewPosition).getName()));
                         context.startActivity(delIntent);
@@ -62,10 +66,6 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                         mData.remove(viewPosition);
                         mAdapter.notifyItemRemoved(viewPosition);
                         mAdapter.notifyItemRangeChanged(viewPosition, mData.size());
-
-                        String eventDetete = "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
-                        YandexMetrica.reportEvent("Было удалено приложение", eventDetete);
-
                         break;
                     case R.id.pop_menu_settings:
                         final Intent settingsIntent = new Intent();
