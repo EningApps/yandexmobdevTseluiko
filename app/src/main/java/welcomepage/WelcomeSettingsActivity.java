@@ -49,19 +49,23 @@ public class WelcomeSettingsActivity extends AppCompatActivity
             public Fragment getItem(int position) {
                 switch (position){
                     case 0:
-                        return WelcomeGuideFragment.newInstance();
+                        return WelcomeGuide1.newInstance();
                     case 1:
-                        return ThemeChoiceFragment.newInstance();
+                        return WelcomeGuide2.newInstance();
                     case 2:
+                        return WelcomeGuide3.newInstance();
+                    case 3:
+                        return ThemeChoiceFragment.newInstance();
+                    case 4:
                         return IconsAmountSettingsFragment.newInstance();
                     default:
-                        return WelcomeGuideFragment.newInstance();
+                        return IconsAmountSettingsFragment.newInstance();
                 }
             }
 
             @Override
             public int getCount() {
-                return 3;
+                return 5;
             }
         };
         mViewPager.setAdapter(mFragmentPagerAdapter);

@@ -13,6 +13,7 @@
         android:entries="@array/theme_type"
         android:entryValues="@array/theme_type"
         android:dialogTitle="@string/dialog_title_theme_pref" />
+
     <ListPreference
     android:key="sort_key"
     android:title="@string/appSort"
@@ -27,8 +28,8 @@
 
 
     <CheckBoxPreference
-        android:key="show_welcomepage"
-        android:title="@string/showWelcomePageNext"
+        android:key="update_image_now"
+        android:title="@string/updImagesNow"
         android:defaultValue="false"/>
 
 </PreferenceScreen>

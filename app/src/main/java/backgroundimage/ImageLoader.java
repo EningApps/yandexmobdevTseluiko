@@ -1,14 +1,18 @@
 package backgroundimage;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -66,4 +70,28 @@ class ImageLoader {
 
         return mImageUrls;
     }
+
+
+    Bitmap loadBitmap(String srcUrl) {
+        try {
+            URL url = new URL(srcUrl);
+            URLConnection urlConnection = url.openConnection();
+            InputStream is = urlConnection.getInputStream();
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
+            int nRead;
+            byte[] data = new byte[16384];
+
+            while ((nRead = is.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            byte [] bitmap = buffer.toByteArray();
+            return BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
+        } catch (IOException e) {
+
+        }
+        return null;
+    }
+
 }

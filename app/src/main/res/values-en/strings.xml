@@ -119,4 +119,8 @@
     <string name="listType">the List</string>
     <string name="settings">Settings</string>
     <string name="isRandomImage">Set different images on background</string>
+    <string name="guide1">With the navigation icon in the top left corner, you can easily select a convenient mode for you to display the list of applications.</string>
+    <string name="guide2">By going to the settings you can choose the appropriate properties of the application.</string>
+    <string name="guide3">To launch the app, simply tap on it. Long press will open an additional menu.</string>
+    <string name="updImagesNow">Update images now</string>
 </resources>

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,7 @@ public class DevProfileActivity extends AppCompatActivity {
     private ImageView mProfileImageView;
     private TextView mGitLink, mFacebookLink, mTwitterLink, mVkLink;
     private View mGitField, mFacebookField, mTwitterField, mVkField;
+    private Bitmap mBackgroundBitmap;
 
 
     @Override
@@ -54,7 +56,6 @@ public class DevProfileActivity extends AppCompatActivity {
         }
 
         YandexMetrica.reportEvent("Был выполнен переход в ProfileActivity");
-
 
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
@@ -81,8 +82,14 @@ public class DevProfileActivity extends AppCompatActivity {
         mTwitterLink = findViewById(R.id.textViewTwitter);
         mVkLink = findViewById(R.id.textViewVk);
 
+
+        if (savedInstanceState != null) {
+            mBackgroundBitmap = (Bitmap) savedInstanceState.getParcelable("BackgroundBitmap");
+        }
+
         setFieldsClickListeners();
         setFieldsVisibility();
+
 
         checkForUpdates();
     }
@@ -154,9 +161,14 @@ public class DevProfileActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         final View rootView = findViewById(R.id.dev_prof_root_layout);
-        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
-        imagesLoadedReciver.registerBackground(rootView);
-        checkForCrashes();
+        if(mBackgroundBitmap!=null){
+            rootView.setBackground(new BitmapDrawable(getResources(),mBackgroundBitmap));
+        }else {
+            mBackgroundBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+            imagesLoadedReciver.registerBackground(rootView);
+            checkForCrashes();
+        }
     }
 
     @Override
@@ -178,6 +190,12 @@ public class DevProfileActivity extends AppCompatActivity {
     private void checkForUpdates() {
         // Remove this for store builds!
         UpdateManager.register(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable("BackgroundBitmap",mBackgroundBitmap);
+        super.onSaveInstanceState(outState);
     }
 
     private void unregisterManagers() {

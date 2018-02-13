@@ -59,6 +59,11 @@
         <service android:name="backgroundimage.ImageLoadJobService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
 
+        <receiver android:name="backgroundimage.ImagesLoadedReciver">
+            <intent-filter>
+                <action android:name="com.tseluikoartem.yandexmobdev.IMAGES_LOADED"/>
+            </intent-filter>
+        </receiver>
 
     </application>
 
