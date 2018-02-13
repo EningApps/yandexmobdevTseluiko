@@ -5,12 +5,10 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.IntentFilter;
 
 import com.yandex.metrica.YandexMetrica;
 
 import backgroundimage.ImageLoadJobService;
-import backgroundimage.ImagesLoadedReciver;
 import utils.ApplicationConstants;
 
 import static utils.ApplicationConstants.BackgroundImagesConstants.JOB_ID_LOAD_IMAGE;
@@ -36,15 +34,11 @@ public class LauncherApplication extends Application  {
             jobScheduler.schedule(
                     new JobInfo.Builder(JOB_ID_LOAD_IMAGE,
                             new ComponentName(getApplicationContext(), ImageLoadJobService.class))
-                            .setOverrideDeadline(0L)
-                         //   .setPeriodic(90005)
+                            //.setOverrideDeadline(0L)
+                            .setPeriodic(90005)
                             .build()
             );
         }
-        ImagesLoadedReciver imagesReciver = ImagesLoadedReciver.getInstance();
-
-        registerReceiver(imagesReciver,
-                new IntentFilter(ApplicationConstants.BackgroundImagesConstants.BROADCAST_ACTION_IMAGES_LOADED));
-
     }
+
 }

@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import launcher.MainLauncherActivity;
 
+import static utils.ApplicationConstants.SharedPreferenciesConstants.MAKET_TYPE_KEY;
 import static utils.ApplicationConstants.SharedPreferenciesConstants.SHOW_WELCOMEPAGE_KEY;
 
 
@@ -57,6 +58,13 @@ public class IconsAmountSettingsFragment extends Fragment {
         mLargeMaketButton = layout.findViewById(R.id.radioButtonLargeMaket);
 
         mFinishButton = layout.findViewById(R.id.finish_settings_button);
+
+        final int spanCount = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(MAKET_TYPE_KEY,4);
+        if(spanCount==4){
+            mStandartMaketButton.setChecked(true);
+        }else {
+            mLargeMaketButton.setChecked(true);
+        }
 
         setViewsOnClickListeners();
 

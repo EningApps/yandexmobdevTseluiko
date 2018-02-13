@@ -5,13 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.view.View;
 
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 import com.yandex.metrica.YandexMetrica;
 
 import java.util.ArrayList;
@@ -27,8 +23,7 @@ public class ImagesLoadedReciver extends BroadcastReceiver {
 
     private static final ImagesLoadedReciver INSTANCE = new ImagesLoadedReciver();
     private static final List<View> mBackgrounds = new ArrayList<>();
-
-
+    private static final List<Bitmap> mBackgroundBitmaps = new ArrayList<>();
 
 
     @Override
@@ -36,7 +31,7 @@ public class ImagesLoadedReciver extends BroadcastReceiver {
         String action = intent.getAction();
         if (BROADCAST_ACTION_IMAGES_LOADED.equals(action)) {
             mImagesUrls = intent.getStringArrayExtra(BROADCAST_PARAM_IMAGES_NAMES);
-            for (View backgroundView : mBackgrounds){
+            for(View backgroundView : mBackgrounds){
                 setBackround(backgroundView,context);
             }
 
@@ -61,18 +56,12 @@ public class ImagesLoadedReciver extends BroadcastReceiver {
 
         final int index = isRandomImageNeeded?0:new Random().nextInt(mImagesUrls.length-1);
 
+        final BackgroundImageAsyncChanger imageAsyncChanger = new BackgroundImageAsyncChanger(view,view.getContext());
+        imageAsyncChanger.execute(mImagesUrls[index]);
+    }
 
-
-        Picasso.with(context).load(mImagesUrls[index]).into(new Target() {
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {}
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {}
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                view.setBackground(new BitmapDrawable(view.getResources(), bitmap));
-            }
-        });
+    public static List<Bitmap> getBackgroundBitmaps() {
+        return mBackgroundBitmaps;
     }
 
     public static ImagesLoadedReciver getInstance() {
