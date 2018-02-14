@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.View;
 
+import com.tseluikoartem.ening.yandexmobdevproject.R;
+
 
 public class BackgroundImageAsyncChanger extends AsyncTask<String,Bitmap,Drawable> {
 
@@ -18,6 +20,11 @@ public class BackgroundImageAsyncChanger extends AsyncTask<String,Bitmap,Drawabl
     public BackgroundImageAsyncChanger(View backgroundView, Context context) {
         this.backgroundView = backgroundView;
         this.context = context;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        backgroundView.setBackground(context.getResources().getDrawable(R.drawable.logo_gradient));
     }
 
     @Override

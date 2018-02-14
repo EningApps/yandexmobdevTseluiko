@@ -26,7 +26,6 @@ public interface ApplicationConstants {
 
     public interface YandexAppMetricaConstants{
         public static final String API_KEY = "dbcd0800-42ae-4c4d-a1bb-d37917cdb6c1";
-
     }
 
     public interface BackgroundImagesConstants{

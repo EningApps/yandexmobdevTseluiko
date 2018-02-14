@@ -59,7 +59,7 @@ public class IconsAmountSettingsFragment extends Fragment {
 
         mFinishButton = layout.findViewById(R.id.finish_settings_button);
 
-        final int spanCount = PreferenceManager.getDefaultSharedPreferences(getContext()).getInt(MAKET_TYPE_KEY,4);
+        final int spanCount = Integer.parseInt(PreferenceManager.getDefaultSharedPreferences(getContext()).getString(MAKET_TYPE_KEY,"4"));
         if(spanCount==4){
             mStandartMaketButton.setChecked(true);
         }else {

@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array id="colors" name="random_colors" >
-        <item>#f92b99</item>
-        <item>#ce77f1</item>
-        <item>#2bf995</item>
-        <item>#3cd6fc</item>
-        <item>#f9e82b</item>
-        <item>#250dfd</item>
-        <item>#fa9b2f</item>
-        <item>#fa0707</item>
-        <item>#2bf9e8</item>
-        <item>#e8f92b</item>
-        <item>#f92b7d</item>
-        <item>#f9b12b</item>
-        <item>#28b11e</item>
-        <item>#ab0ff9</item>
-        <item>#8b8d94</item>
-        <item>#280719</item>
-    </array>
 
     <string-array name="maket_type">
         <item>Плотный макет</item>
@@ -47,5 +29,20 @@
     </string-array>
 
 
+    <string-array name="update_type">
+        <item>Обновить единожды сейчас</item>
+        <item>15 мин</item>
+        <item>30 мин</item>
+        <item>1 час</item>
+        <item>2 часа</item>
+    </string-array>
+
+    <string-array name="update_time_vals">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
 
 </resources>
