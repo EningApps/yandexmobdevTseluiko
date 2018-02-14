@@ -1,6 +1,10 @@
 package launcher.fragments;
 
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +22,8 @@ public class ListIconsFragment extends LauncherAbstractFragment {
     private RecyclerView mRecyclerView;
     private View mRootView;
     private OnFragmentsContentInteractionListener mListener;
+    private Drawable mBackgroundDrawable;
+
 
     public ListIconsFragment() {
         // Required empty public constructor
@@ -32,6 +38,10 @@ public class ListIconsFragment extends LauncherAbstractFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState!=null){
+            mBackgroundDrawable = new BitmapDrawable(getResources(), (Bitmap) savedInstanceState.getParcelable("background"));
+        }
+
         setRetainInstance(true);
     }
 
@@ -43,6 +53,7 @@ public class ListIconsFragment extends LauncherAbstractFragment {
         mRecyclerView = layout.findViewById(R.id.fragment_list_recycler_view);
         mListener.setRecyclerViewComponents(mRecyclerView,1);
         mRootView = layout;
+
         return  layout;
     }
 
@@ -61,10 +72,22 @@ public class ListIconsFragment extends LauncherAbstractFragment {
 
     @Override
     public void onResume() {
-        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
-        imagesLoadedReciver.registerBackground(mRootView);
+//        if(mBackgroundDrawable!=null){
+//            mRootView.setBackground(mBackgroundDrawable);
+//        }
+//        else {
+            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+            imagesLoadedReciver.registerBackground(mRootView);
+//        }
         super.onResume();
     }
+
+    @Override
+    public void onPause() {
+        mBackgroundDrawable = mRootView.getBackground();
+        super.onPause();
+    }
+
 
     @Override
     public void onDetach() {

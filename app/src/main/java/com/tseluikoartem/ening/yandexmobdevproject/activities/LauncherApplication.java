@@ -34,8 +34,8 @@ public class LauncherApplication extends Application  {
             jobScheduler.schedule(
                     new JobInfo.Builder(JOB_ID_LOAD_IMAGE,
                             new ComponentName(getApplicationContext(), ImageLoadJobService.class))
-                            //.setOverrideDeadline(0L)
-                            .setPeriodic(90005)
+                            .setOverrideDeadline(0L)
+                            //.setPeriodic(90005)
                             .build()
             );
         }

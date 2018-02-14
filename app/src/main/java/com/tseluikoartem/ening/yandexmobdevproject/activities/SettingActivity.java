@@ -5,6 +5,7 @@ import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -25,18 +26,29 @@ public class SettingActivity extends PreferenceActivity {
     private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            final boolean isUpdateImagesNeeded = sharedPreferences.getBoolean(key,false);
-            if(isUpdateImagesNeeded){
+            int updateType=100;
+            try {
+                updateType = Integer.parseInt(sharedPreferences.getString(key,"100"));
+            }catch (ClassCastException e){}
+            if(updateType!=100) {
                 JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
+                jobScheduler.cancel(JOB_ID_LOAD_IMAGE);
                 if (jobScheduler != null) {
-                    jobScheduler.schedule(
-                            new JobInfo.Builder(JOB_ID_LOAD_IMAGE,
-                                    new ComponentName(getApplicationContext(), ImageLoadJobService.class))
-                                    .setOverrideDeadline(0L)
-                                    .build()
-                    );
+                    final JobInfo.Builder jobBuilder=  new JobInfo.Builder(JOB_ID_LOAD_IMAGE, new ComponentName(getApplicationContext(), ImageLoadJobService.class));
+                    JobInfo jobInfo = null;
+                    if(updateType==0){
+                       jobInfo = jobBuilder.setOverrideDeadline(0L).build();
+                    }else if(updateType==1){
+                        jobInfo =  jobBuilder.setPeriodic(90000).build();
+                    }else if(updateType==2){
+                        jobInfo = jobBuilder.setPeriodic(180000).build();
+                    }else if(updateType==3){
+                        jobInfo = jobBuilder.setPeriodic(360000).build();
+                    }else if(updateType==4){
+                        jobInfo =  jobBuilder.setPeriodic(720000).build();
+                    }
+                    jobScheduler.schedule(jobInfo);
                 }
-                sharedPreferences.edit().putBoolean(key,false).apply();
             }
         }
     };

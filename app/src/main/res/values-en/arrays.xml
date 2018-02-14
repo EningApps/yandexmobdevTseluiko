@@ -31,6 +31,7 @@
         <item>Светлая тема</item>
         <item>Тёмная тема</item>
     </string-array>
+
     <string-array name="sort_type">
         <item>Без сортировки</item>
         <item>По времени установки</item>
@@ -45,6 +46,23 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+
+    <string-array name="update_type">
+        <item>Update now</item>
+        <item>15 мин</item>
+        <item>30 мин</item>
+        <item>1 час</item>
+        <item>2 часа</item>
+    </string-array>
+
+    <string-array name="update_time_vals">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
 
 
 

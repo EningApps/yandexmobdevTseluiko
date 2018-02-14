@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +41,8 @@ public class DevProfileActivity extends AppCompatActivity {
     private ImageView mProfileImageView;
     private TextView mGitLink, mFacebookLink, mTwitterLink, mVkLink;
     private View mGitField, mFacebookField, mTwitterField, mVkField;
-    private Bitmap mBackgroundBitmap;
+    private View mRootView;
+    private Drawable mBackgroundDrawable;
 
 
     @Override
@@ -67,6 +69,12 @@ public class DevProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        if (savedInstanceState!=null){
+            mBackgroundDrawable = new BitmapDrawable(getResources(), (Bitmap) savedInstanceState.getParcelable("background"));
+        }
+
+        mRootView = findViewById(R.id.dev_prof_root_layout);
+
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.face);
         mProfileImageView = (ImageView) findViewById(R.id.faceImageView);
         mProfileImageView.setImageBitmap(ImageViewRounder.getRoundedBitmap(bitmap));
@@ -81,11 +89,6 @@ public class DevProfileActivity extends AppCompatActivity {
         mFacebookLink = findViewById(R.id.textViewFacebook);
         mTwitterLink = findViewById(R.id.textViewTwitter);
         mVkLink = findViewById(R.id.textViewVk);
-
-
-        if (savedInstanceState != null) {
-            mBackgroundBitmap = (Bitmap) savedInstanceState.getParcelable("BackgroundBitmap");
-        }
 
         setFieldsClickListeners();
         setFieldsVisibility();
@@ -160,20 +163,21 @@ public class DevProfileActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        final View rootView = findViewById(R.id.dev_prof_root_layout);
-        if(mBackgroundBitmap!=null){
-            rootView.setBackground(new BitmapDrawable(getResources(),mBackgroundBitmap));
-        }else {
-            mBackgroundBitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
-            imagesLoadedReciver.registerBackground(rootView);
-            checkForCrashes();
+        if(mBackgroundDrawable!=null){
+            mRootView.setBackground(mBackgroundDrawable);
         }
+        else {
+            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+            imagesLoadedReciver.registerBackground(mRootView);
+        }
+        checkForCrashes();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        mBackgroundDrawable = mRootView.getBackground();
         unregisterManagers();
     }
 
@@ -194,7 +198,10 @@ public class DevProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable("BackgroundBitmap",mBackgroundBitmap);
+        if(mBackgroundDrawable!=null){
+            final Bitmap backBitmap = ((BitmapDrawable)mBackgroundDrawable).getBitmap();
+            outState.putParcelable("background",backBitmap);
+        }
         super.onSaveInstanceState(outState);
     }
 

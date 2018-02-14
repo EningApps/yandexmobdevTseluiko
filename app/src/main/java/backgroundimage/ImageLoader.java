@@ -50,7 +50,7 @@ class ImageLoader {
                 final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
                 final String formattedDate = dateFormat.format(calendar.getTime());
 
-                final String stringUrl = ApplicationConstants.BackgroundImagesConstants.YANDEX_FOTKI_URL + formattedDate + ApplicationConstants.BackgroundImagesConstants.YANDEX_FOTKI_DATE_RULE;
+                final String stringUrl = "http://api-fotki.yandex.ru/api/recent/";//ApplicationConstants.BackgroundImagesConstants.YANDEX_FOTKI_URL + formattedDate + ApplicationConstants.BackgroundImagesConstants.YANDEX_FOTKI_DATE_RULE;
                 final URL url = new URL(stringUrl);
                 final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.connect();

@@ -15,21 +15,27 @@
         android:dialogTitle="@string/dialog_title_theme_pref" />
 
     <ListPreference
-    android:key="sort_key"
-    android:title="@string/appSort"
-    android:entries="@array/sort_type"
-    android:entryValues="@array/sort_number"
-    android:dialogTitle="@string/chooseSort" />
+        android:key="sort_key"
+        android:title="@string/appSort"
+        android:entries="@array/sort_type"
+        android:entryValues="@array/sort_number"
+        android:dialogTitle="@string/chooseSort" />
+
+    <CheckBoxPreference
+        android:key="show_welcomepage"
+        android:title="@string/showWelcomePageNext"
+        android:defaultValue="false"/>
+
+    <ListPreference
+        android:key="sort_key"
+        android:title="Фон"
+        android:entries="@array/update_type"
+        android:entryValues="@array/update_time_vals"
+        android:dialogTitle="@string/updatetype" />
 
     <CheckBoxPreference
         android:key="is_random_image"
         android:title="@string/isRandomImage"
-        android:defaultValue="false"/>
-
-
-    <CheckBoxPreference
-        android:key="update_image_now"
-        android:title="@string/updImagesNow"
-        android:defaultValue="false"/>
+        android:defaultValue="true"/>
 
 </PreferenceScreen>
