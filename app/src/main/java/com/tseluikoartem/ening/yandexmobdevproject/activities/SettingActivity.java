@@ -28,22 +28,23 @@ public class SettingActivity extends PreferenceActivity {
             int updateType=100;
             try {
                 updateType = Integer.parseInt(sharedPreferences.getString(key,"100"));
-            }catch (ClassCastException e){}
-            if(updateType!=100) {
+            }catch (ClassCastException | NumberFormatException e){
+            }
+            if(updateType >=10 && updateType<=14) {
                 JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
                 jobScheduler.cancel(JOB_ID_LOAD_IMAGE);
                 if (jobScheduler != null) {
                     final JobInfo.Builder jobBuilder=  new JobInfo.Builder(JOB_ID_LOAD_IMAGE, new ComponentName(getApplicationContext(), ImageLoadJobService.class));
                     JobInfo jobInfo = null;
-                    if(updateType==0){
+                    if(updateType==10){
                        jobInfo = jobBuilder.setOverrideDeadline(0L).build();
-                    }else if(updateType==1){
+                    }else if(updateType==11){
                         jobInfo =  jobBuilder.setPeriodic(90000).build();
-                    }else if(updateType==2){
+                    }else if(updateType==12){
                         jobInfo = jobBuilder.setPeriodic(180000).build();
-                    }else if(updateType==3){
+                    }else if(updateType==13){
                         jobInfo = jobBuilder.setPeriodic(360000).build();
-                    }else if(updateType==4){
+                    }else if(updateType==14){
                         jobInfo =  jobBuilder.setPeriodic(720000).build();
                     }
                     jobScheduler.schedule(jobInfo);
