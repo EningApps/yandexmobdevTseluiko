@@ -1,6 +1,5 @@
 package desktop.recyclerview;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;

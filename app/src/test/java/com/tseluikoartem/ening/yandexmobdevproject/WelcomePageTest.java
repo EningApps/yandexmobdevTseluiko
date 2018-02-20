@@ -5,17 +5,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import junit.framework.Assert;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 
 import java.util.Random;
 
-import welcomepage.AppWelcomeInfoActivity;
 import welcomepage.IconsAmountSettingsFragment;
 import welcomepage.ThemeChoiceFragment;
 import welcomepage.WelcomeGuide1;
