@@ -23,48 +23,43 @@
             android:value="31180e98341589f1bc92f1205f76d0e0bd26be31" />
 
         <activity android:name="welcomepage.AppWelcomeInfoActivity" />
-
-        <activity
-            android:name="launcher.MainLauncherActivity"
-            android:label="Tseluiko"
-            android:theme="@style/AppLightTheme">
-
-        </activity>
-
         <activity
             android:name=".activities.SettingActivity"
             android:label="@string/title_activity_preferencies"
-            android:parentActivityName="launcher.MainLauncherActivity">
+            android:parentActivityName="launcher.MainLauncherActivity"></activity>
+        <activity
+            android:name=".activities.SplashStartActivity"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name="desktop.DesktopMainActivity">
 
         </activity>
-
-         <activity android:name=".activities.SplashStartActivity"
-         android:theme="@style/SplashTheme">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-                 <category android:name="android.intent.category.HOME" />
-                 <category android:name="android.intent.category.DEFAULT" />
-
-             </intent-filter>
-
-
-         </activity>
-
+        <activity
+            android:name="desktop.appchooser.AppChooseActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity
             android:name="launcher.IconExtendedInformationActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog" />
         <activity android:name="welcomepage.WelcomeSettingsActivity" />
 
-        <service android:name="backgroundimage.ImageLoadJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service
+            android:name="backgroundimage.ImageLoadJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver android:name="backgroundimage.ImagesLoadedReciver">
             <intent-filter>
-                <action android:name="com.tseluikoartem.yandexmobdev.IMAGES_LOADED"/>
+                <action android:name="com.tseluikoartem.yandexmobdev.IMAGES_LOADED" />
             </intent-filter>
         </receiver>
 
+        <activity android:name="launcher.MainLauncherActivity"></activity>
     </application>
 
 </manifest>

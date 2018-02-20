@@ -27,7 +27,7 @@
         android:defaultValue="false"/>
 
     <ListPreference
-        android:key="sort_key"
+        android:key="update_period"
         android:title="Фон"
         android:entries="@array/update_type"
         android:entryValues="@array/update_time_vals"

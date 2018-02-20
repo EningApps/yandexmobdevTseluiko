@@ -55,7 +55,7 @@ public class AppWelcomeInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 sp.edit().putBoolean(SHOW_WELCOMEPAGE_KEY, false).apply();
-                final Intent intent = new Intent(getApplicationContext(),MainLauncherActivity.class);
+                final Intent intent = new Intent(getApplicationContext(), MainLauncherActivity.class);
 
                 startActivity(intent);
             }

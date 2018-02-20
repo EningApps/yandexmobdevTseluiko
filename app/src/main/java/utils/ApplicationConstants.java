@@ -17,6 +17,7 @@ public interface ApplicationConstants {
         public static final String SHOW_TWITTER_KEY = "show_twitter";
         public static final String SHOW_FACEBOOK_KEY = "show_facebook";
         public static final String SHOW_VK_KEY = "show_vk";
+        public static final String UPDATE_IMAGE_KEY = "update_period";
         public static final String APPLICATION_SORT = "sort_key";
 
         public static final String THEME_DARK = "Тёмная тема";
