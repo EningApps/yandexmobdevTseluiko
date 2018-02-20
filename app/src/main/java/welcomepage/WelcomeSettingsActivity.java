@@ -25,6 +25,9 @@ public class WelcomeSettingsActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private FragmentPagerAdapter mFragmentPagerAdapter;
 
+    public FragmentPagerAdapter getmFragmentPagerAdapter() {
+        return mFragmentPagerAdapter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
