@@ -124,4 +124,6 @@
     <string name="guide3">Чтобы запустить приложение, просто нажмите на него. При длительном нажатии откроется дополнительное меню.</string>
     <string name="updImagesNow">Обновить картинки на фоне сейчас</string>
     <string name="updatetype">Выберите период обновления фона</string>
+    <string name="desktop">Рабочий стол</string>
+    <string name="chooseApp">Выберите приложение:</string>
 </resources>

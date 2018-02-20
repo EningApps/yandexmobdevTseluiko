@@ -1,6 +1,5 @@
 package launcher;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -16,6 +15,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,7 +28,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.DevProfileActivity;
@@ -39,6 +38,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.AppsDbHelper;
+import desktop.appchooser.AppChooseActivity;
+import desktop.recyclerview.DesktopFragment;
 import launcher.fragments.GridIconsFragment;
 import launcher.fragments.LauncherAbstractFragment;
 import launcher.fragments.ListIconsFragment;
@@ -94,9 +95,21 @@ public class MainLauncherActivity extends AppCompatActivity
         mFragments = new ArrayList<>();
         final GridIconsFragment gridIconsFragment = GridIconsFragment.newInstance();
         final ListIconsFragment listIconsFragment = ListIconsFragment.newInstance();
+        final DesktopFragment desktopFragment = DesktopFragment.newInstance();
         mFragments.add(gridIconsFragment);
         mFragments.add(listIconsFragment);
-        setLauncherFragment(gridIconsFragment);
+        final Intent intent = getIntent();
+        if(intent.getStringExtra("app_name")!=null){
+            final Bundle bundle = new Bundle();
+            bundle.putString("add_app_name",intent.getStringExtra("app_name"));
+            desktopFragment.setArguments(bundle);
+            mFragments.add(desktopFragment);
+            setRecyclerViewComponents(new RecyclerView(this),0);
+            setLauncherFragment(desktopFragment);
+        }else {
+            mFragments.add(desktopFragment);
+            setLauncherFragment(gridIconsFragment);
+        }
 
         mReciver.setAdapter(mAdapter);
 
@@ -118,17 +131,17 @@ public class MainLauncherActivity extends AppCompatActivity
         List<AppModel> data = new ArrayList<>();
         Cursor cursor = db.query(AppsDbHelper.appsDatabase.TABLE_NAME,projection,null,null,null,null, null);
         while (cursor.moveToNext()) {
-           AppModel appModel = new AppModel();
-           appModel.setName(cursor.getString(cursor.getColumnIndex(AppsDbHelper.appsDatabase.Columns.COLUMN_APP_NAME)));
-           appModel.setLabel(cursor.getString(cursor.getColumnIndex(AppsDbHelper.appsDatabase.Columns.COLUMN_APP_LABEL)));
-           ApplicationInfo appInfo=null;
-           try {
-               appInfo = packageManager.getApplicationInfo(appModel.getName(),0);
-           } catch (PackageManager.NameNotFoundException e) {
-               Log.d("DB", "не найдено - " + appModel.getName());
-           }
-           appModel.setIcon(appInfo.loadIcon(packageManager));
-           data.add(appModel);
+            AppModel appModel = new AppModel();
+            appModel.setName(cursor.getString(cursor.getColumnIndex(AppsDbHelper.appsDatabase.Columns.COLUMN_APP_NAME)));
+            appModel.setLabel(cursor.getString(cursor.getColumnIndex(AppsDbHelper.appsDatabase.Columns.COLUMN_APP_LABEL)));
+            ApplicationInfo appInfo=null;
+            try {
+                appInfo = packageManager.getApplicationInfo(appModel.getName(),0);
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.d("DB", "не найдено - " + appModel.getName());
+            }
+            appModel.setIcon(appInfo.loadIcon(packageManager));
+            data.add(appModel);
         }
         return data;
     }
@@ -173,11 +186,11 @@ public class MainLauncherActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         final View navigationHeaderView = navigationView.getHeaderView(0);
-        FloatingActionButton floatingActionButton = findViewById(R.id.fab_launcher);
+        final FloatingActionButton floatingActionButton = findViewById(R.id.fab_launcher);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(),"Мне просто очень нравится эта кнопка",Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AppChooseActivity.class));
             }
         });
 
@@ -194,8 +207,9 @@ public class MainLauncherActivity extends AppCompatActivity
     }
 
     private void setLauncherFragment(LauncherAbstractFragment fragment){
-        final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragmentsContainer,fragment).commit();
+
     }
 
     private void sortData(){
@@ -266,17 +280,20 @@ public class MainLauncherActivity extends AppCompatActivity
 
         super.onResume();
         sortData();
-        RecyclerView.LayoutManager layoutManager = mFragments.get(0).getRecyclerView().getLayoutManager();
-        if (layoutManager instanceof GridLayoutManager) {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-            int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
-            if(getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
-                spanCount += 2;
-                YandexMetrica.reportEvent("Устройство было переведено в landscape режим");
-            }
-            YandexMetrica.reportEvent("Устройство было переведено в портретный режим");
+        final RecyclerView recyclerView = mFragments.get(0).getRecyclerView();
+        if(recyclerView!=null) {
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if (layoutManager instanceof GridLayoutManager && layoutManager != null) {
+                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+                int spanCount = Integer.parseInt(sp.getString(MAKET_TYPE_KEY, "4"));
+                if (getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
+                    spanCount += 2;
+                    YandexMetrica.reportEvent("Устройство было переведено в landscape режим");
+                }
+                YandexMetrica.reportEvent("Устройство было переведено в портретный режим");
 
-            ((GridLayoutManager) layoutManager).setSpanCount(spanCount);
+                ((GridLayoutManager) layoutManager).setSpanCount(spanCount);
+            }
         }
     }
 
@@ -327,6 +344,10 @@ public class MainLauncherActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_settings) {
             startActivity(new Intent(this, SettingActivity.class));
+            YandexMetrica.reportEvent("Был выполнен переход в настройки");
+
+        } else if (id == R.id.nav_desktop) {
+            setLauncherFragment(mFragments.get(2));
             YandexMetrica.reportEvent("Был выполнен переход в настройки");
 
         }
