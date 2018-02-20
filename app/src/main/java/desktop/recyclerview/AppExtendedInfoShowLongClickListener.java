@@ -1,6 +1,5 @@
 package desktop.recyclerview;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -14,6 +13,7 @@ import com.tseluikoartem.ening.yandexmobdevproject.R;
 
 import java.util.List;
 
+import desktop.RoomdatabaseSingleton;
 import desktop.appchooser.AppDAOPersistant;
 import desktop.appchooser.AppModelPersistant;
 import desktop.roomdatabase.AppDatabase;
@@ -36,8 +36,7 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
         this.viewPosition = viewPosition;
         this.mAdapter = adapter;
         this.mData = data;
-        this.database =  Room.databaseBuilder(context,//todo вынести это в синглтон
-                AppDatabase.class, "database").build();
+        this.database = RoomdatabaseSingleton.getInstance(context);
     }
 
     @Override
