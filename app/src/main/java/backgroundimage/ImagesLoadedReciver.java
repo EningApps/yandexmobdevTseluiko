@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.View;
 
-import com.yandex.metrica.YandexMetrica;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +51,8 @@ public class ImagesLoadedReciver extends BroadcastReceiver {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         final boolean isRandomImageNeeded = sp.getBoolean(BROADCAST_IS_RANDOM_IMAGE,false);
 
-        String eventParams = "{\"isRandomBackground\":\""+isRandomImageNeeded+"\"}";
-        YandexMetrica.reportEvent("Была выбран стиль фона:", eventParams);
+  //      String eventParams = "{\"isRandomBackground\":\""+isRandomImageNeeded+"\"}";
+//        YandexMetrica.reportEvent("Была выбран стиль фона:", eventParams);
 
         final int index = isRandomImageNeeded? mAllSamePicIndex : new Random().nextInt(mImagesUrls.length-1);
 

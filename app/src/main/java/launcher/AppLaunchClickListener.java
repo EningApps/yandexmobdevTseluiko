@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.View;
 
-import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
@@ -54,7 +53,6 @@ public class AppLaunchClickListener implements View.OnClickListener {
         dbHelper.updateAppRecord(database, mData.get(mPosition).getName(), count);
 
         String eventSetngs= "{\"name\":\""+mData.get(mPosition).getName()+"\"";
-        YandexMetrica.reportEvent("Было запущено приложение", eventSetngs);
 
         mContext.startActivity(intent);
     }

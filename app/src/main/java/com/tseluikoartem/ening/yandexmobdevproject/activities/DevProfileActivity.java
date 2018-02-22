@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import com.crashlytics.android.Crashlytics;
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.yandex.metrica.YandexMetrica;
 
 import backgroundimage.ImagesLoadedReciver;
 import io.fabric.sdk.android.Fabric;
@@ -57,7 +56,6 @@ public class DevProfileActivity extends AppCompatActivity {
             setTheme(R.style.AppDarkTheme);
         }
 
-        YandexMetrica.reportEvent("Был выполнен переход в ProfileActivity");
 
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());

@@ -21,6 +21,9 @@ public class ThemeChoiceFragment extends Fragment {
     private OnThemeChangeListener mListener;
     private RadioButton mLightThemeButton, mDarkThemeButton;
 
+
+
+
     public ThemeChoiceFragment() {
         // Required empty public constructor
     }

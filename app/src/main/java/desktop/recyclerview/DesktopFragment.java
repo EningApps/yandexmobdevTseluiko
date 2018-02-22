@@ -16,7 +16,6 @@
 
 package desktop.recyclerview;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -37,6 +36,7 @@ import com.tseluikoartem.ening.yandexmobdevproject.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import desktop.RoomdatabaseSingleton;
 import desktop.appchooser.AppDAOPersistant;
 import desktop.appchooser.AppModelPersistant;
 import desktop.roomdatabase.AppDAO;
@@ -45,9 +45,6 @@ import desktop.roomdatabase.AppModel;
 import launcher.fragments.LauncherAbstractFragment;
 
 
-/**
- * @author Paul Burke (ipaulpro)
- */
 public class DesktopFragment extends LauncherAbstractFragment implements OnStartDragListener {
 
 
@@ -87,8 +84,7 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
         super.onViewCreated(view, savedInstanceState);
 
 
-        appDatabase =  Room.databaseBuilder(getActivity(),//todo вынести это в синглтон
-                AppDatabase.class, "database").build();
+        appDatabase = RoomdatabaseSingleton.getInstance(getActivity());
 
         SharedPreferences preferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         final boolean isInitNeeded = preferences.getBoolean("isInitNeeded",true);
