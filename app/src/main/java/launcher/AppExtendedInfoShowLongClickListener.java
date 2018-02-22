@@ -13,7 +13,6 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.yandex.metrica.YandexMetrica;
 
 import java.util.List;
 
@@ -53,7 +52,6 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                         }
 
                         String eventDetete = "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
-                        YandexMetrica.reportEvent("Было удалено приложение", eventDetete);
 
                         Intent delIntent = new Intent(Intent.ACTION_DELETE);
                         delIntent.setData(Uri.parse("package:"+ mData.get(viewPosition).getName()));
@@ -75,7 +73,6 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                         context.startActivity(settingsIntent);
 
                         String eventSetngs= "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
-                        YandexMetrica.reportEvent("Был произведён переход в системные настройки", eventSetngs);
 
                         break;
                     case R.id.pop_menu_info:
@@ -84,7 +81,6 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                         context.startActivity(infoIntent);
 
                         String eventInfo = "{\"name\":\""+mData.get(viewPosition).getName()+"\"}";
-                        YandexMetrica.reportEvent("Была показана доп. информация", eventInfo);
 
                         break;
                 }

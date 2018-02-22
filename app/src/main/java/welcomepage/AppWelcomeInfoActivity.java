@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
-import com.yandex.metrica.YandexMetrica;
 
 import backgroundimage.ImagesLoadedReciver;
 import launcher.MainLauncherActivity;
@@ -45,7 +44,6 @@ public class AppWelcomeInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final Intent intent = new Intent(getApplicationContext(),WelcomeSettingsActivity.class);
 
-                YandexMetrica.reportEvent("Был произведён переход в \"Гайд и настройки\"");
 
                 startActivity(intent);
             }

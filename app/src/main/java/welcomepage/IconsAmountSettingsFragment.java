@@ -29,6 +29,13 @@ public class IconsAmountSettingsFragment extends Fragment {
     private RadioButton mLargeMaketButton;
     private RadioButton mStandartMaketButton;
 
+    public RadioButton getmLargeMaketButton() {
+        return mLargeMaketButton;
+    }
+
+    public RadioButton getmStandartMaketButton() {
+        return mStandartMaketButton;
+    }
 
     public IconsAmountSettingsFragment() {
         // Required empty public constructor

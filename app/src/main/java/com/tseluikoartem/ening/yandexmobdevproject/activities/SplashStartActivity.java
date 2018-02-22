@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 
-import com.yandex.metrica.YandexMetrica;
 
 import launcher.MainLauncherActivity;
 import welcomepage.AppWelcomeInfoActivity;
@@ -25,7 +24,6 @@ public class SplashStartActivity extends AppCompatActivity {
         Intent intent = null;
         if(isWelcomePageNeeded){
              intent = new Intent(this, AppWelcomeInfoActivity.class);
-             YandexMetrica.reportEvent("Была запущена WelcomePage");
 
         }else{
             intent = new Intent(this, MainLauncherActivity.class);

@@ -25,6 +25,10 @@ public class WelcomeSettingsActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private FragmentPagerAdapter mFragmentPagerAdapter;
 
+    public ViewPager getmViewPager() {
+        return mViewPager;
+    }
+
     public FragmentPagerAdapter getmFragmentPagerAdapter() {
         return mFragmentPagerAdapter;
     }

@@ -49,6 +49,10 @@ public class AppChooseActivity extends AppCompatActivity {
         this.mData = data;
     }
 
+    public List<AppModelPersistant> getmData() {
+        return mData;
+    }
+
     private class LoadFromDBAsyncTask extends AsyncTask<Void, Void, Void> {
 
         private AppChooseActivity activity;
