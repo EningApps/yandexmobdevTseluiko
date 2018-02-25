@@ -59,6 +59,13 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:name=".SilentPushReceiver">
+            <intent-filter>
+                <!--Получение silent push-уведомлений-->
+                <action android:name="${applicationId}.action.ymp.SILENT_PUSH_RECEIVE"/>
+            </intent-filter>
+        </receiver>
+
         <activity android:name="launcher.MainLauncherActivity"></activity>
     </application>
 

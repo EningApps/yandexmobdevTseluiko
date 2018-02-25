@@ -7,7 +7,11 @@ import android.content.ComponentName;
 import android.content.Context;
 
 
+import com.yandex.metrica.YandexMetrica;
+import com.yandex.metrica.push.YandexMetricaPush;
+
 import backgroundimage.ImageLoadJobService;
+import utils.ApplicationConstants;
 
 import static utils.ApplicationConstants.BackgroundImagesConstants.JOB_ID_LOAD_IMAGE;
 
@@ -24,6 +28,8 @@ public class LauncherApplication extends Application  {
         super.onCreate();
 
 
+        YandexMetrica.activate(getApplicationContext(), ApplicationConstants.YandexAppMetricaConstants.API_KEY);
+        YandexMetricaPush.init(getApplicationContext());
 
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (jobScheduler != null) {

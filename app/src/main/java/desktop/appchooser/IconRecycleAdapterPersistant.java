@@ -1,6 +1,5 @@
 package desktop.appchooser;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -16,6 +15,7 @@ import com.tseluikoartem.ening.yandexmobdevproject.R;
 
 import java.util.List;
 
+import desktop.RoomdatabaseSingleton;
 import desktop.roomdatabase.AppDatabase;
 import launcher.MainLauncherActivity;
 
@@ -35,8 +35,7 @@ public class IconRecycleAdapterPersistant extends RecyclerView.Adapter{
         this.data = data;
         this.mPackageManager = mPackageManager;
         this.mContext = mContext;
-        database = Room.databaseBuilder(mContext,//todo вынести это в синглтон
-                AppDatabase.class, "database").build();
+        database = RoomdatabaseSingleton.getInstance(mContext);
     }
 
     @Override
@@ -73,7 +72,6 @@ public class IconRecycleAdapterPersistant extends RecyclerView.Adapter{
         textView.setText(data.get(position).getLabel());
 
     }
-
 
 
     public PackageManager getPackageManager() {
