@@ -103,7 +103,7 @@ workflows:
           requires:
             - prepare_dependencies
             - build_app
-            - run_tests
+#            - run_tests
             - run_checkStyle
             - run_pmd
           filters:
