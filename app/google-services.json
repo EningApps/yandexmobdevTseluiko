@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "218813612226",
+    "firebase_url": "https://yandexmobdev.firebaseio.com",
+    "project_id": "yandexmobdev",
+    "storage_bucket": "yandexmobdev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218813612226:android:2f1ef175d795e2ea",
+        "android_client_info": {
+          "package_name": "com.tseluikoartem.ening.yandexmobdevproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218813612226-du3h7etg8u1ti93c0qpj77ggs83gut40.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdWazHoAf8syZWVdTgNCMLP9Mk5_KPh0g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
