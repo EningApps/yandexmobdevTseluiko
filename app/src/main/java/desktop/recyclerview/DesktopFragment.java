@@ -17,9 +17,11 @@
 package desktop.recyclerview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -29,6 +31,8 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
@@ -57,6 +61,9 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
 
     private AppDatabase appDatabase;
 
+    private Button searchButton;
+    private EditText searchEditText;
+
     private String addAppName;
 
     public DesktopFragment() {
@@ -71,6 +78,19 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.desktop_layout,container,false);
+        searchButton = layout.findViewById(R.id.buttonSearch);
+        searchEditText = layout.findViewById(R.id.searchEditText);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "https://yandex.by/search/?lr=157&text="+searchEditText.getText().toString();
+                if (url!=null && !url.equals("")) {
+                    final Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(url));
+                    startActivity(intent);
+                }
+            }
+        });
         return layout;
     }
 
