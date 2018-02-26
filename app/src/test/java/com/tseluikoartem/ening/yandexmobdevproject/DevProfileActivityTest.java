@@ -44,7 +44,7 @@ public class DevProfileActivityTest {
         preferences.edit().putBoolean("show_vk",false).commit();
         preferences.edit().putBoolean("show_twitter",false).commit();
 
-        final DevProfileActivity activity = Robolectric.buildActivity( DevProfileActivity.class ).create().resume().get();
+        final DevProfileActivity activity = Robolectric.setupActivity(DevProfileActivity.class);
         final View mGitField, mFacebookField, mTwitterField, mVkField;
         mGitField = activity.findViewById(R.id.gitField);
         mTwitterField = activity.findViewById(R.id.twitterField);
