@@ -27,7 +27,6 @@ public class LauncherApplication extends Application  {
     public void onCreate() {
         super.onCreate();
 
-
         YandexMetrica.activate(getApplicationContext(), ApplicationConstants.YandexAppMetricaConstants.API_KEY);
         YandexMetricaPush.init(getApplicationContext());
 
