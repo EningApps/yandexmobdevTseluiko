@@ -102,6 +102,13 @@ public class MainLauncherActivity extends AppCompatActivity
             mData = loadDataFromDB(mBdHelper, mPackageManager);
 
         }
+        while(mData == null){
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
 
         mReciver = new ApplicationOperationsReciver();
 
