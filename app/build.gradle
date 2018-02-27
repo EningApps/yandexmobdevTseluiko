@@ -14,9 +14,6 @@ apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
 
-
-
-
 checkstyle {
     toolVersion = "8.7"
 }
@@ -51,10 +48,10 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.tseluikoartem.ening.yandexmobdevproject"
-        minSdkVersion 22
+        minSdkVersion 21
         targetSdkVersion 26
         versionCode 1
-        versionName "4.0.1"
+        versionName "5.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [HOCKEYAPP_APP_ID: "1b47357324b947eba1dfd8980363bc16"]
     }
