@@ -16,6 +16,7 @@
 
 package desktop.recyclerview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -51,6 +53,7 @@ import launcher.fragments.LauncherAbstractFragment;
 
 public class DesktopFragment extends LauncherAbstractFragment implements OnStartDragListener {
 
+    private View mRootLayout;
 
     private ItemTouchHelper mItemTouchHelper;
 
@@ -78,6 +81,7 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View layout = inflater.inflate(R.layout.desktop_layout,container,false);
+        mRootLayout = layout.findViewById(R.id.root_desktopView);
         searchButton = layout.findViewById(R.id.buttonSearch);
         searchEditText = layout.findViewById(R.id.searchEditText);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +95,7 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
                 }
             }
         });
+
         return layout;
     }
 
@@ -132,6 +137,14 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
         recyclerView.setLayoutManager(layoutManager);
         final int offset = 32;
         recyclerView.addItemDecoration(new OffsetItemDecoration(offset));
+
+        mRootLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mRootLayout.getWindowToken(), 0);
+            }
+        });
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mAdapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
