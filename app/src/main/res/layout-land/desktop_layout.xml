@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
+    android:id="@+id/root_desktopView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/addButton"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="+"/>
+        <ImageView
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/yandex" />
 
+        <EditText
+            android:id="@+id/searchEditText"
+            android:layout_width="394dp"
+            android:cursorVisible="false"
+            android:layout_height="match_parent"
+            android:background="@drawable/rounded_edit_text"
+            android:hint="  Поск"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="63dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/pressed_search"
+            android:text="  Найти"
+            android:textAlignment="viewStart"
+
+            android:textSize="14sp" />
 
     </LinearLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/desktop_recycler"

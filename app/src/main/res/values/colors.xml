@@ -7,6 +7,7 @@
     <color name="white">#ffffff</color>
     <color name="spashBackground">#74bcfc</color>
     <color name="lightGray2">#f3f3fc</color>
+    <color name="lightGray3">#f1f1f7</color>
     <color name="darkAccent">#6b2447</color>
     <color name="darkPrimary">#4b4b89</color>
     <color name="darkTheme">#343443</color>

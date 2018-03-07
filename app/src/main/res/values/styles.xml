@@ -32,4 +32,8 @@
         <item name="android:windowBackground">@drawable/welcome_activity_background</item>
     </style>
 
+    <style name="NoTitleDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
 </resources>

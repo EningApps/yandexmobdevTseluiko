@@ -10,6 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import database.AppsDbHelper;
+import desktop.RoomdatabaseSingleton;
+import desktop.appchooser.AppModelChosen;
+import desktop.roomdatabase.AppDatabase;
 
 public class ApplicationOperationsReciver extends BroadcastReceiver {
 
@@ -49,6 +52,17 @@ public class ApplicationOperationsReciver extends BroadcastReceiver {
                 appModel.setName(appName);
                 appModel.setIcon(appIcon);
                 appModel.setLabel(appLabel);
+
+                final AppModelChosen appModelChosen = new AppModelChosen();
+                appModelChosen.setLabel(appLabel);
+                appModelChosen.setName(appName);
+                final AppDatabase appDatabase = RoomdatabaseSingleton.getInstance(context);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        appDatabase.appDaoPersistant().insert(appModelChosen);
+                    }
+                });
                 adapter.getData().add(appModel);
                 adapter.notifyDataSetChanged();
                 adapter.notifyItemRangeChanged(0, adapter.getData().size());

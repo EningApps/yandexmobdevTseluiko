@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 
 
 @Entity
-public class AppModelPersistant {
+public class AppModelChosen {
 
     @NonNull
     @PrimaryKey

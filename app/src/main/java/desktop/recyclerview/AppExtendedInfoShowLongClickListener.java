@@ -15,7 +15,7 @@ import java.util.List;
 
 import desktop.RoomdatabaseSingleton;
 import desktop.appchooser.AppDAOPersistant;
-import desktop.appchooser.AppModelPersistant;
+import desktop.appchooser.AppModelChosen;
 import desktop.roomdatabase.AppDatabase;
 import desktop.roomdatabase.AppModel;
 
@@ -51,13 +51,13 @@ public class AppExtendedInfoShowLongClickListener implements View.OnLongClickLis
                 switch (menuItem.getItemId()){
                     case R.id.pop_menu_del:
                         final AppDAOPersistant appDAOPersistant = database.appDaoPersistant();
-                        final AppModelPersistant appModelPersistant = new AppModelPersistant();
-                        appModelPersistant.setLabel(mData.get(viewPosition).getLabel());
-                        appModelPersistant.setName(mData.get(viewPosition).getName());
+                        final AppModelChosen appModelChosen = new AppModelChosen();
+                        appModelChosen.setLabel(mData.get(viewPosition).getLabel());
+                        appModelChosen.setName(mData.get(viewPosition).getName());
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                appDAOPersistant.insert(appModelPersistant);
+                                appDAOPersistant.insert(appModelChosen);
                             }
                         }).start();
 
