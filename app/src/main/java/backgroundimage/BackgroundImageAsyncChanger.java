@@ -30,7 +30,7 @@ public class BackgroundImageAsyncChanger extends AsyncTask<String,Bitmap,Drawabl
     @Override
     protected Drawable doInBackground(String ... imageUrl) {
 
-        final ImageLoader imageLoader = new ImageLoader();
+        final ImageLoader imageLoader = ImageLoader.getsInstance();
         final Bitmap bitmap = imageLoader.loadBitmap(imageUrl[0]);
         final Drawable backgroundDrawable = new BitmapDrawable(context.getResources(),bitmap);
         return backgroundDrawable;

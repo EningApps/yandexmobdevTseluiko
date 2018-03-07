@@ -14,25 +14,25 @@ import java.util.List;
 @Dao
 public interface AppDAOPersistant {
 
-    @Query("SELECT * FROM appmodelpersistant")
-    List<AppModelPersistant> getAll();
+    @Query("SELECT * FROM AppModelChosen")
+    List<AppModelChosen> getAll();
 
-    @Query("SELECT * FROM appmodelpersistant WHERE mname = :appname")
-    AppModelPersistant getByName(String appname);
-
-    @Insert
-    void insert(List<AppModelPersistant> appModel);
+    @Query("SELECT * FROM AppModelChosen WHERE mname = :appname")
+    AppModelChosen getByName(String appname);
 
     @Insert
-    void insert(AppModelPersistant appModel);
+    void insert(List<AppModelChosen> appModel);
+
+    @Insert
+    void insert(AppModelChosen appModel);
 
     @Update
-    void update(AppModelPersistant appModel);
+    void update(AppModelChosen appModel);
 
-    @Query("DELETE FROM appmodelpersistant WHERE mname = :appname")
+    @Query("DELETE FROM AppModelChosen WHERE mname = :appname")
     void delete(String appname);
 
-    @Query("DELETE FROM appmodelpersistant")
+    @Query("DELETE FROM AppModelChosen")
     void deleteAll();
 
 }

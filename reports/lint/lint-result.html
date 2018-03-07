@@ -173,10 +173,10 @@ document.getElementById(id).style.display = 'none';
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Lint Report: 5 errors and 19 warnings</span>
+      <span class="mdl-layout-title">Lint Report: 5 errors and 24 warnings</span>
       <div class="mdl-layout-spacer"></div>
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-Check performed at Sun Feb 25 20:21:30 MSK 2018      </nav>
+Check performed at Wed Mar 07 22:43:32 MSK 2018      </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
@@ -188,10 +188,9 @@ Check performed at Sun Feb 25 20:21:30 MSK 2018      </nav>
       <a class="mdl-navigation__link" href="#GradleDependency"><i class="material-icons warning-icon">warning</i>Obsolete Gradle Dependency (5)</a>
       <a class="mdl-navigation__link" href="#GradleDynamicVersion"><i class="material-icons warning-icon">warning</i>Gradle Dynamic Version (1)</a>
       <a class="mdl-navigation__link" href="#StaticFieldLeak"><i class="material-icons warning-icon">warning</i>Static Field Leaks (4)</a>
-      <a class="mdl-navigation__link" href="#GoogleAppIndexingWarning"><i class="material-icons warning-icon">warning</i>Missing support for Firebase App Indexing (1)</a>
       <a class="mdl-navigation__link" href="#ClickableViewAccessibility"><i class="material-icons warning-icon">warning</i>Accessibility in Custom Views (1)</a>
       <a class="mdl-navigation__link" href="#SetTextI18n"><i class="material-icons warning-icon">warning</i>TextView Internationalization (1)</a>
-      <a class="mdl-navigation__link" href="#RtlHardcoded"><i class="material-icons warning-icon">warning</i>Using left/right instead of start/end attributes (6)</a>
+      <a class="mdl-navigation__link" href="#RtlHardcoded"><i class="material-icons warning-icon">warning</i>Using left/right instead of start/end attributes (12)</a>
     </nav>
   </div>
   <main class="mdl-layout__content">
@@ -223,11 +222,6 @@ Check performed at Sun Feb 25 20:21:30 MSK 2018      </nav>
 <tr>
 <td class="countColumn">4</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#StaticFieldLeak">StaticFieldLeak</a>: Static Field Leaks</td></tr>
-<tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Usability">Usability</a>
-</td></tr>
-<tr>
-<td class="countColumn">1</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
-<a href="#GoogleAppIndexingWarning">GoogleAppIndexingWarning</a>: Missing support for Firebase App Indexing</td></tr>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Accessibility">Accessibility</a>
 </td></tr>
 <tr>
@@ -241,7 +235,7 @@ Check performed at Sun Feb 25 20:21:30 MSK 2018      </nav>
 <tr><td class="countColumn"></td><td class="categoryColumn"><a href="#Internationalization:Bidirectional Text">Internationalization:Bidirectional Text</a>
 </td></tr>
 <tr>
-<td class="countColumn">6</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
+<td class="countColumn">12</td><td class="issueColumn"><i class="material-icons warning-icon">warning</i>
 <a href="#RtlHardcoded">RtlHardcoded</a>: Using left/right instead of start/end attributes</td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (168)</a>
 </td></tr></table>
@@ -261,14 +255,14 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../app/src/main/java/desktop/appchooser/IconRecycleAdapterPersistant.java">../../app/src/main/java/desktop/appchooser/IconRecycleAdapterPersistant.java</a>:55</span>: <span class="message">Do not treat position as fixed; only use immediately and call <code>holder.getAdapterPosition()</code> to look it up later</span><br /><pre class="errorlines">
-<span class="lineno"> 52 </span>  }
-<span class="lineno"> 53 </span>
-<span class="lineno"> 54 </span>  <span class="annotation">@Override</span>
-<span class="caretline"><span class="lineno"> 55 </span>  <span class="keyword">public</span> <span class="keyword">void</span> onBindViewHolder(RecyclerView.ViewHolder holder, <span class="error"><span class="keyword">final</span> <span class="keyword">int</span> position</span>) {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 56 </span>      <span class="keyword">final</span> View iconField = ((DesktopRecyclerViewHolder.IconLinearHolder) holder).getIconField();
-<span class="lineno"> 57 </span>      <span class="keyword">final</span> View iconView = ((DesktopRecyclerViewHolder.IconLinearHolder) holder).getIconView();
-<span class="lineno"> 58 </span>      iconField.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+<span class="location"><a href="../../app/src/main/java/desktop/appchooser/IconRecycleAdapterPersistant.java">../../app/src/main/java/desktop/appchooser/IconRecycleAdapterPersistant.java</a>:56</span>: <span class="message">Do not treat position as fixed; only use immediately and call <code>holder.getAdapterPosition()</code> to look it up later</span><br /><pre class="errorlines">
+<span class="lineno"> 53 </span>  }
+<span class="lineno"> 54 </span>
+<span class="lineno"> 55 </span>  <span class="annotation">@Override</span>
+<span class="caretline"><span class="lineno"> 56 </span>  <span class="keyword">public</span> <span class="keyword">void</span> onBindViewHolder(RecyclerView.ViewHolder holder, <span class="error"><span class="keyword">final</span> <span class="keyword">int</span> position</span>) {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 57 </span>      <span class="keyword">final</span> View iconField = ((DesktopRecyclerViewHolder.IconLinearHolder) holder).getIconField();
+<span class="lineno"> 58 </span>      <span class="keyword">final</span> View iconView = ((DesktopRecyclerViewHolder.IconLinearHolder) holder).getIconView();
+<span class="lineno"> 59 </span>      iconField.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
 </pre>
 
 </div>
@@ -374,50 +368,50 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:154</span>: <span class="message">A newer version of com.android.support.test:runner than 0.5 is available: 1.0.1</span><br /><pre class="errorlines">
-<span class="lineno"> 151 </span>    implementation <span class="string">'com.android.support:support-v4:26.1.0'</span>
-<span class="lineno"> 152 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
-<span class="lineno"> 153 </span>    androidTestImplementation <span class="string">'com.android.support.test:runner:1.0.1'</span>
-<span class="caretline"><span class="lineno"> 154 </span>    <span class="warning">androidTestCompile <span class="string">'com.android.support.test:runner:0.5'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 155 </span>    androidTestCompile <span class="string">'com.android.support.test:rules:0.5'</span>
-<span class="lineno"> 156 </span>    androidTestCompile <span class="string">'com.android.support.test.espresso:espresso-intents:3.0.1'</span>
+<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:152</span>: <span class="message">A newer version of com.android.support.test:runner than 0.5 is available: 1.0.1</span><br /><pre class="errorlines">
+<span class="lineno"> 149 </span>    implementation <span class="string">'com.android.support:support-v4:26.1.0'</span>
+<span class="lineno"> 150 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
+<span class="lineno"> 151 </span>    androidTestImplementation <span class="string">'com.android.support.test:runner:1.0.1'</span>
+<span class="caretline"><span class="lineno"> 152 </span>    <span class="warning">androidTestCompile <span class="string">'com.android.support.test:runner:0.5'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 153 </span>    androidTestCompile <span class="string">'com.android.support.test:rules:0.5'</span>
+<span class="lineno"> 154 </span>    androidTestCompile <span class="string">'com.android.support.test.espresso:espresso-intents:3.0.1'</span>
 </pre>
 
-<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:155</span>: <span class="message">A newer version of com.android.support.test:rules than 0.5 is available: 1.0.1</span><br /><pre class="errorlines">
-<span class="lineno"> 152 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
-<span class="lineno"> 153 </span>    androidTestImplementation <span class="string">'com.android.support.test:runner:1.0.1'</span>
-<span class="lineno"> 154 </span>    androidTestCompile <span class="string">'com.android.support.test:runner:0.5'</span>
-<span class="caretline"><span class="lineno"> 155 </span>    <span class="warning">androidTestCompile <span class="string">'com.android.support.test:rules:0.5'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 156 </span>    androidTestCompile <span class="string">'com.android.support.test.espresso:espresso-intents:3.0.1'</span>
-<span class="lineno"> 157 </span>
-<span class="lineno"> 158 </span>    compile <span class="string">'com.yandex.android:mobmetricalib:2.80'</span></pre>
+<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:153</span>: <span class="message">A newer version of com.android.support.test:rules than 0.5 is available: 1.0.1</span><br /><pre class="errorlines">
+<span class="lineno"> 150 </span>    testImplementation <span class="string">'junit:junit:4.12'</span>
+<span class="lineno"> 151 </span>    androidTestImplementation <span class="string">'com.android.support.test:runner:1.0.1'</span>
+<span class="lineno"> 152 </span>    androidTestCompile <span class="string">'com.android.support.test:runner:0.5'</span>
+<span class="caretline"><span class="lineno"> 153 </span>    <span class="warning">androidTestCompile <span class="string">'com.android.support.test:rules:0.5'</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 154 </span>    androidTestCompile <span class="string">'com.android.support.test.espresso:espresso-intents:3.0.1'</span>
+<span class="lineno"> 155 </span>
+<span class="lineno"> 156 </span>    compile <span class="string">'com.yandex.android:mobmetricalib:2.80'</span></pre>
 
-<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:161</span>: <span class="message">A newer version of com.crashlytics.sdk.android:crashlytics than 2.8.0 is available: 2.9.0</span><br /><pre class="errorlines">
-<span class="lineno"> 158 </span>    compile <span class="string">'com.yandex.android:mobmetricalib:2.80'</span>
-<span class="lineno"> 159 </span>    implementation <span class="string">'com.android.support:cardview-v7:26.1.0'</span>
-<span class="lineno"> 160 </span>    compile <span class="string">'net.hockeyapp.android:HockeySDK:5.1.0'</span>
-<span class="caretline"><span class="lineno"> 161 </span>    <span class="warning">compile(<span class="string">'com.crashlytics.sdk.android:crashlytics:2.8.0@aar'</span>) {</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 162 </span>        transitive = <span class="keyword">true</span>;
-<span class="lineno"> 163 </span>    }
-<span class="lineno"> 164 </span>    implementation <span class="string">'com.android.support:gridlayout-v7:26.1.0'</span></pre>
+<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:159</span>: <span class="message">A newer version of com.crashlytics.sdk.android:crashlytics than 2.8.0 is available: 2.9.1</span><br /><pre class="errorlines">
+<span class="lineno"> 156 </span>    compile <span class="string">'com.yandex.android:mobmetricalib:2.80'</span>
+<span class="lineno"> 157 </span>    implementation <span class="string">'com.android.support:cardview-v7:26.1.0'</span>
+<span class="lineno"> 158 </span>    compile <span class="string">'net.hockeyapp.android:HockeySDK:5.1.0'</span>
+<span class="caretline"><span class="lineno"> 159 </span>    <span class="warning">compile(<span class="string">'com.crashlytics.sdk.android:crashlytics:2.8.0@aar'</span>) {</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 160 </span>        transitive = <span class="keyword">true</span>;
+<span class="lineno"> 161 </span>    }
+<span class="lineno"> 162 </span>    implementation <span class="string">'com.android.support:gridlayout-v7:26.1.0'</span></pre>
 
-<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:166</span>: <span class="message">A newer version of android.arch.lifecycle:extensions than 1.0.0 is available: 1.1.0</span><br /><pre class="errorlines">
-<span class="lineno"> 163 </span>    }
-<span class="lineno"> 164 </span>    implementation <span class="string">'com.android.support:gridlayout-v7:26.1.0'</span>
-<span class="lineno"> 165 </span>
-<span class="caretline"><span class="lineno"> 166 </span>    <span class="warning">implementation <span class="string">"android.arch.lifecycle:extensions:1.0.0"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 167 </span>    annotationProcessor <span class="string">"android.arch.lifecycle:compiler:1.0.0"</span>
-<span class="lineno"> 168 </span>
-<span class="lineno"> 169 </span>    implementation <span class="string">"android.arch.persistence.room:runtime:1.0.0"</span></pre>
+<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:164</span>: <span class="message">A newer version of android.arch.lifecycle:extensions than 1.0.0 is available: 1.1.0</span><br /><pre class="errorlines">
+<span class="lineno"> 161 </span>    }
+<span class="lineno"> 162 </span>    implementation <span class="string">'com.android.support:gridlayout-v7:26.1.0'</span>
+<span class="lineno"> 163 </span>
+<span class="caretline"><span class="lineno"> 164 </span>    <span class="warning">implementation <span class="string">"android.arch.lifecycle:extensions:1.0.0"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 165 </span>    annotationProcessor <span class="string">"android.arch.lifecycle:compiler:1.0.0"</span>
+<span class="lineno"> 166 </span>
+<span class="lineno"> 167 </span>    implementation <span class="string">"android.arch.persistence.room:runtime:1.0.0"</span></pre>
 
-<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:167</span>: <span class="message">A newer version of android.arch.lifecycle:compiler than 1.0.0 is available: 1.1.0</span><br /><pre class="errorlines">
-<span class="lineno"> 164 </span>    implementation <span class="string">'com.android.support:gridlayout-v7:26.1.0'</span>
-<span class="lineno"> 165 </span>
-<span class="lineno"> 166 </span>    implementation <span class="string">"android.arch.lifecycle:extensions:1.0.0"</span>
-<span class="caretline"><span class="lineno"> 167 </span>    <span class="warning">annotationProcessor <span class="string">"android.arch.lifecycle:compiler:1.0.0"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 168 </span>
-<span class="lineno"> 169 </span>    implementation <span class="string">"android.arch.persistence.room:runtime:1.0.0"</span>
-<span class="lineno"> 170 </span>    annotationProcessor <span class="string">"android.arch.persistence.room:compiler:1.0.0"</span></pre>
+<span class="location"><a href="../../app/build.gradle">../../app/build.gradle</a>:165</span>: <span class="message">A newer version of android.arch.lifecycle:compiler than 1.0.0 is available: 1.1.0</span><br /><pre class="errorlines">
+<span class="lineno"> 162 </span>    implementation <span class="string">'com.android.support:gridlayout-v7:26.1.0'</span>
+<span class="lineno"> 163 </span>
+<span class="lineno"> 164 </span>    implementation <span class="string">"android.arch.lifecycle:extensions:1.0.0"</span>
+<span class="caretline"><span class="lineno"> 165 </span>    <span class="warning">annotationProcessor <span class="string">"android.arch.lifecycle:compiler:1.0.0"</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 166 </span>
+<span class="lineno"> 167 </span>    implementation <span class="string">"android.arch.persistence.room:runtime:1.0.0"</span>
+<span class="lineno"> 168 </span>    annotationProcessor <span class="string">"android.arch.persistence.room:compiler:1.0.0"</span></pre>
 
 </div>
 <div class="metadata"><div class="explanation" id="explanationGradleDependency" style="display: none;">
@@ -502,14 +496,14 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
-<span class="location"><a href="../../app/src/main/java/desktop/appchooser/AppChooseActivity.java">../../app/src/main/java/desktop/appchooser/AppChooseActivity.java</a>:56</span>: <span class="message">This AsyncTask class should be static or leaks might occur (desktop.appchooser.AppChooseActivity.LoadFromDBAsyncTask)</span><br /><pre class="errorlines">
-<span class="lineno"> 53 </span>        <span class="keyword">return</span> mData;
-<span class="lineno"> 54 </span>    }
-<span class="lineno"> 55 </span>
-<span class="caretline"><span class="lineno"> 56 </span>    <span class="keyword">private</span> <span class="keyword">class</span> <span class="warning">LoadFromDBAsyncTask</span> <span class="keyword">extends</span> AsyncTask&lt;Void, Void, Void> {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 57 </span>
-<span class="lineno"> 58 </span>        <span class="keyword">private</span> AppChooseActivity activity;
-<span class="lineno"> 59 </span>        <span class="keyword">private</span> AppDatabase appDatabase;
+<span class="location"><a href="../../app/src/main/java/desktop/appchooser/AppChooseActivity.java">../../app/src/main/java/desktop/appchooser/AppChooseActivity.java</a>:92</span>: <span class="message">This AsyncTask class should be static or leaks might occur (desktop.appchooser.AppChooseActivity.LoadFromDBAsyncTask)</span><br /><pre class="errorlines">
+<span class="lineno">  89 </span>    }
+<span class="lineno">  90 </span>
+<span class="lineno">  91 </span>
+<span class="caretline"><span class="lineno">  92 </span>    <span class="keyword">private</span> <span class="keyword">class</span> <span class="warning">LoadFromDBAsyncTask</span> <span class="keyword">extends</span> AsyncTask&lt;Void, Void, Void> {&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  93 </span>
+<span class="lineno">  94 </span>        <span class="keyword">private</span> AppChooseActivity activity;
+<span class="lineno">  95 </span>        <span class="keyword">private</span> AppDatabase appDatabase;
 </pre>
 
 <span class="location"><a href="../../app/src/main/java/backgroundimage/BackgroundImageAsyncChanger.java">../../app/src/main/java/backgroundimage/BackgroundImageAsyncChanger.java</a>:17</span>: <span class="message">This field leaks a context object</span><br /><pre class="errorlines">
@@ -532,14 +526,14 @@ Dismiss</button>            </div>
 <span class="lineno"> 21 </span>        <span class="keyword">this</span>.backgroundView = backgroundView;
 </pre>
 
-<span class="location"><a href="../../app/src/main/java/desktop/recyclerview/DesktopFragment.java">../../app/src/main/java/desktop/recyclerview/DesktopFragment.java</a>:161</span>: <span class="message">This AsyncTask class should be static or leaks might occur (desktop.recyclerview.DesktopFragment.LoadFromDBAsyncTask)</span><br /><pre class="errorlines">
-<span class="lineno"> 158 </span>        <span class="keyword">return</span> mAdapterData;
-<span class="lineno"> 159 </span>    }
-<span class="lineno"> 160 </span>
-<span class="caretline"><span class="lineno"> 161 </span>    <span class="keyword">private</span> <span class="keyword">class</span> <span class="warning">LoadFromDBAsyncTask</span> <span class="keyword">extends</span> AsyncTask&lt;Void, Void, Void>{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-<span class="lineno"> 162 </span>
-<span class="lineno"> 163 </span>        <span class="keyword">private</span> DesktopFragment gridFragment;
-<span class="lineno"> 164 </span>        <span class="keyword">private</span> AppDatabase appDatabase;
+<span class="location"><a href="../../app/src/main/java/desktop/recyclerview/DesktopFragment.java">../../app/src/main/java/desktop/recyclerview/DesktopFragment.java</a>:168</span>: <span class="message">This AsyncTask class should be static or leaks might occur (desktop.recyclerview.DesktopFragment.LoadFromDBAsyncTask)</span><br /><pre class="errorlines">
+<span class="lineno"> 165 </span>        <span class="keyword">return</span> mAdapterData;
+<span class="lineno"> 166 </span>    }
+<span class="lineno"> 167 </span>
+<span class="caretline"><span class="lineno"> 168 </span>    <span class="keyword">private</span> <span class="keyword">class</span> <span class="warning">LoadFromDBAsyncTask</span> <span class="keyword">extends</span> AsyncTask&lt;Void, Void, Void>{&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 169 </span>
+<span class="lineno"> 170 </span>        <span class="keyword">private</span> DesktopFragment gridFragment;
+<span class="lineno"> 171 </span>        <span class="keyword">private</span> AppDatabase appDatabase;
 </pre>
 
 </div>
@@ -572,54 +566,6 @@ ViewModel classes should never point to Views or non-application Contexts.<br/>T
               <div class="mdl-card__actions mdl-card--border">
 <button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationStaticFieldLeakLink" onclick="reveal('explanationStaticFieldLeak');">
 Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="StaticFieldLeakCardLink" onclick="hideid('StaticFieldLeakCard');">
-Dismiss</button>            </div>
-            </div>
-          </section>
-<a name="Usability"></a>
-<a name="GoogleAppIndexingWarning"></a>
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp" id="GoogleAppIndexingWarningCard" style="display: block;">
-            <div class="mdl-card mdl-cell mdl-cell--12-col">
-  <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">Missing support for Firebase App Indexing</h2>
-  </div>
-              <div class="mdl-card__supporting-text">
-<div class="issue">
-<div class="warningslist">
-<span class="location"><a href="../../app/src/main/AndroidManifest.xml">../../app/src/main/AndroidManifest.xml</a>:7</span>: <span class="message">App is not indexable by Google Search; consider adding at least one Activity with an ACTION-VIEW intent filter. See issue explanation for more details.</span><br /><pre class="errorlines">
-<span class="lineno">  4 </span>
-<span class="lineno">  5 </span>    <span class="tag">&lt;uses-permission</span><span class="attribute"> </span><span class="prefix">android:</span><span class="attribute">name</span>=<span class="value">"android.permission.INTERNET"</span> />
-<span class="lineno">  6 </span>
-<span class="caretline"><span class="lineno">  7 </span>    <span class="warning"><span class="tag">&lt;application</span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="attribute">
-</span><span class="lineno">  8 </span><span class="attribute">        </span><span class="prefix">android:</span><span class="attribute">name</span>=<span class="value">".activities.LauncherApplication"</span>
-<span class="lineno">  9 </span>        <span class="prefix">android:</span><span class="attribute">allowBackup</span>=<span class="value">"true"</span>
-<span class="lineno"> 10 </span>        <span class="prefix">android:</span><span class="attribute">icon</span>=<span class="value">"@drawable/logo"</span></pre>
-
-</div>
-<div class="metadata"><div class="explanation" id="explanationGoogleAppIndexingWarning" style="display: none;">
-Adds URLs to get your app into the Google index, to get installs and traffic to your app from Google Search.<br/><div class="moreinfo">More info: <a href="https://g.co/AppIndexing/AndroidStudio">https://g.co/AppIndexing/AndroidStudio</a>
-</div>Note: This issue has an associated quickfix operation in Android Studio and IntelliJ IDEA.<br>
-To suppress this error, use the issue id "GoogleAppIndexingWarning" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
-<br/></div>
-</div>
-</div>
-<div class="chips">
-<span class="mdl-chip">
-    <span class="mdl-chip__text">GoogleAppIndexingWarning</span>
-</span>
-<span class="mdl-chip">
-    <span class="mdl-chip__text">Usability</span>
-</span>
-<span class="mdl-chip">
-    <span class="mdl-chip__text">Warning</span>
-</span>
-<span class="mdl-chip">
-    <span class="mdl-chip__text">Priority 5/10</span>
-</span>
-</div>
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-<button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="explanationGoogleAppIndexingWarningLink" onclick="reveal('explanationGoogleAppIndexingWarning');">
-Explain</button><button class="mdl-button mdl-js-button mdl-js-ripple-effect" id="GoogleAppIndexingWarningCardLink" onclick="hideid('GoogleAppIndexingWarningCard');">
 Dismiss</button>            </div>
             </div>
           </section>
@@ -731,6 +677,24 @@ Dismiss</button>            </div>
               <div class="mdl-card__supporting-text">
 <div class="issue">
 <div class="warningslist">
+<span class="location"><a href="../../app/src/main/res/layout-port/desktop_layout.xml">../../app/src/main/res/layout-port/desktop_layout.xml</a>:13</span>: <span class="message">Consider replacing <code>android:layout_marginLeft</code> with <code>android:layout_marginStart="8dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno"> 10 </span>    <span class="tag">&lt;LinearLayout</span><span class="attribute">
+</span><span class="lineno"> 11 </span><span class="attribute">        </span><span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
+<span class="lineno"> 12 </span>        <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"42dp"</span>
+<span class="caretline"><span class="lineno"> 13 </span>        <span class="warning"><span class="prefix">android:</span><span class="attribute">layout_marginLeft</span></span>=<span class="value">"8dp"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 14 </span>        <span class="prefix">android:</span><span class="attribute">layout_marginTop</span>=<span class="value">"48dp"</span>
+<span class="lineno"> 15 </span>        <span class="prefix">android:</span><span class="attribute">layout_marginRight</span>=<span class="value">"4dp"</span>
+<span class="lineno"> 16 </span>        <span class="prefix">android:</span><span class="attribute">layout_marginBottom</span>=<span class="value">"16dp"</span></pre>
+
+<span class="location"><a href="../../app/src/main/res/layout-port/desktop_layout.xml">../../app/src/main/res/layout-port/desktop_layout.xml</a>:15</span>: <span class="message">Consider replacing <code>android:layout_marginRight</code> with <code>android:layout_marginEnd="4dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno"> 12 </span>        <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"42dp"</span>
+<span class="lineno"> 13 </span>        <span class="prefix">android:</span><span class="attribute">layout_marginLeft</span>=<span class="value">"8dp"</span>
+<span class="lineno"> 14 </span>        <span class="prefix">android:</span><span class="attribute">layout_marginTop</span>=<span class="value">"48dp"</span>
+<span class="caretline"><span class="lineno"> 15 </span>        <span class="warning"><span class="prefix">android:</span><span class="attribute">layout_marginRight</span></span>=<span class="value">"4dp"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 16 </span>        <span class="prefix">android:</span><span class="attribute">layout_marginBottom</span>=<span class="value">"16dp"</span>
+<span class="lineno"> 17 </span>        <span class="prefix">android:</span><span class="attribute">orientation</span>=<span class="value">"horizontal"</span>>
+</pre>
+
 <span class="location"><a href="../../app/src/main/res/layout-land/fragment_icons_amount_set.xml">../../app/src/main/res/layout-land/fragment_icons_amount_set.xml</a>:16</span>: <span class="message">Consider replacing <code>android:layout_marginLeft</code> with <code>android:layout_marginStart="64dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">  13 </span>        <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"wrap_content"</span>
 <span class="lineno">  14 </span>        <span class="prefix">android:</span><span class="attribute">layout_alignParentTop</span>=<span class="value">"true"</span>
@@ -759,6 +723,8 @@ Dismiss</button>            </div>
 <span class="lineno">  59 </span>                            <span class="prefix">android:</span><span class="attribute">textAlignment</span>=<span class="value">"center"</span>
 <span class="lineno">  60 </span>                            <span class="prefix">android:</span><span class="attribute">textSize</span>=<span class="value">"20sp"</span></pre>
 
+<button class="mdl-button mdl-js-button mdl-button--primary" id="RtlHardcodedDivLink" onclick="reveal('RtlHardcodedDiv');" />+ 7 More Occurrences...</button>
+<div id="RtlHardcodedDiv" style="display: none">
 <span class="location"><a href="../../app/src/main/res/layout-land/fragment_icons_amount_set.xml">../../app/src/main/res/layout-land/fragment_icons_amount_set.xml</a>:62</span>: <span class="message">Consider replacing <code>android:layout_marginLeft</code> with <code>android:layout_marginStart="4dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">  59 </span><span class="attribute">                    </span><span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span>
 <span class="lineno">  60 </span>                    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"wrap_content"</span>
@@ -788,6 +754,45 @@ Dismiss</button>            </div>
 <span class="lineno"> 103 </span>                    <span class="prefix">android:</span><span class="attribute">textSize</span>=<span class="value">"20sp"</span> />
 </pre>
 
+<span class="location"><a href="../../app/src/main/res/layout/icon_linear_layout.xml">../../app/src/main/res/layout/icon_linear_layout.xml</a>:8</span>: <span class="message">Consider replacing <code>android:layout_marginLeft</code> with <code>android:layout_marginStart="4dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  5 </span>    <span class="prefix">android:</span><span class="attribute">paddingTop</span>=<span class="value">"8dp"</span>
+<span class="lineno">  6 </span>    <span class="prefix">android:</span><span class="attribute">paddingStart</span>=<span class="value">"4dp"</span>
+<span class="lineno">  7 </span>    <span class="prefix">android:</span><span class="attribute">paddingEnd</span>=<span class="value">"4dp"</span>
+<span class="caretline"><span class="lineno">  8 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">layout_marginLeft</span></span>=<span class="value">"4dp"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  9 </span>    <span class="prefix">android:</span><span class="attribute">layout_marginTop</span>=<span class="value">"8dp"</span>
+<span class="lineno"> 10 </span>    <span class="prefix">android:</span><span class="attribute">orientation</span>=<span class="value">"horizontal"</span>
+<span class="lineno"> 11 </span>    <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span></pre>
+
+<span class="location"><a href="../../app/src/main/res/layout/icon_linear_layout.xml">../../app/src/main/res/layout/icon_linear_layout.xml</a>:20</span>: <span class="message">Consider replacing <code>android:layout_marginLeft</code> with <code>android:layout_marginStart="4dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno"> 17 </span>        <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"match_parent"</span>/>
+<span class="lineno"> 18 </span>
+<span class="lineno"> 19 </span>    <span class="tag">&lt;View</span><span class="attribute">
+</span><span class="caretline"><span class="lineno"> 20 </span><span class="attribute">        </span><span class="warning"><span class="prefix">android:</span><span class="attribute">layout_marginLeft</span></span>=<span class="value">"4dp"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 21 </span>        <span class="prefix">android:</span><span class="attribute">id</span>=<span class="value">"@+id/icon_view"</span>
+<span class="lineno"> 22 </span>        <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"80dp"</span>
+<span class="lineno"> 23 </span>        <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"80dp"</span> />
+</pre>
+
+<span class="location"><a href="../../app/src/main/res/layout-land/icon_linear_layout_app_choose.xml">../../app/src/main/res/layout-land/icon_linear_layout_app_choose.xml</a>:8</span>: <span class="message">Consider replacing <code>android:layout_marginLeft</code> with <code>android:layout_marginStart="4dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  5 </span>    <span class="prefix">android:</span><span class="attribute">paddingTop</span>=<span class="value">"8dp"</span>
+<span class="lineno">  6 </span>    <span class="prefix">android:</span><span class="attribute">paddingStart</span>=<span class="value">"4dp"</span>
+<span class="lineno">  7 </span>    <span class="prefix">android:</span><span class="attribute">paddingEnd</span>=<span class="value">"4dp"</span>
+<span class="caretline"><span class="lineno">  8 </span>    <span class="warning"><span class="prefix">android:</span><span class="attribute">layout_marginLeft</span></span>=<span class="value">"4dp"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno">  9 </span>    <span class="prefix">android:</span><span class="attribute">layout_marginTop</span>=<span class="value">"8dp"</span>
+<span class="lineno"> 10 </span>    <span class="prefix">android:</span><span class="attribute">orientation</span>=<span class="value">"horizontal"</span>
+<span class="lineno"> 11 </span>    <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"match_parent"</span></pre>
+
+<span class="location"><a href="../../app/src/main/res/layout-land/icon_linear_layout_app_choose.xml">../../app/src/main/res/layout-land/icon_linear_layout_app_choose.xml</a>:16</span>: <span class="message">Consider replacing <code>android:layout_marginLeft</code> with <code>android:layout_marginStart="4dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno"> 13 </span>    <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"wrap_content"</span>>
+<span class="lineno"> 14 </span>
+<span class="lineno"> 15 </span>    <span class="tag">&lt;View</span><span class="attribute">
+</span><span class="caretline"><span class="lineno"> 16 </span><span class="attribute">        </span><span class="warning"><span class="prefix">android:</span><span class="attribute">layout_marginLeft</span></span>=<span class="value">"4dp"</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+<span class="lineno"> 17 </span>        <span class="prefix">android:</span><span class="attribute">id</span>=<span class="value">"@+id/icon_view"</span>
+<span class="lineno"> 18 </span>        <span class="prefix">android:</span><span class="attribute">layout_width</span>=<span class="value">"80dp"</span>
+<span class="lineno"> 19 </span>        <span class="prefix">android:</span><span class="attribute">layout_height</span>=<span class="value">"80dp"</span> />
+</pre>
+
+</div>
 </div>
 <div class="metadata"><div class="explanation" id="explanationRtlHardcoded" style="display: none;">
 Using <code>Gravity#LEFT</code> and <code>Gravity#RIGHT</code> can lead to problems when a layout is rendered in locales where text flows from right to left. Use <code>Gravity#START</code> and <code>Gravity#END</code> instead. Similarly, in XML <code>gravity</code> and <code>layout_gravity</code> attributes, use <code>start</code> rather than <code>left</code>.<br/>

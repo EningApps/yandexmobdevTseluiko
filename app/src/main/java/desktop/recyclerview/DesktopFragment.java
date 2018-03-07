@@ -1,27 +1,8 @@
-/*
- * Copyright (C) 2015 Paul Burke
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
 package desktop.recyclerview;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -29,12 +10,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
@@ -44,7 +28,7 @@ import java.util.List;
 
 import desktop.RoomdatabaseSingleton;
 import desktop.appchooser.AppDAOPersistant;
-import desktop.appchooser.AppModelPersistant;
+import desktop.appchooser.AppModelChosen;
 import desktop.roomdatabase.AppDAO;
 import desktop.roomdatabase.AppDatabase;
 import desktop.roomdatabase.AppModel;
@@ -87,15 +71,38 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                searchEditText.setCursorVisible(false);
                 final String url = "https://yandex.by/search/?lr=157&text="+searchEditText.getText().toString();
-                if (url!=null && !url.equals("")) {
+                if (url!=null && !searchEditText.getText().toString().equals("")) {
                     final Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
                     startActivity(intent);
                 }
             }
         });
+        searchEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchEditText.setCursorVisible(true);
+            }
+        });
+        searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                searchEditText.setCursorVisible(false);
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    final String url = "https://yandex.by/search/?lr=157&text="+searchEditText.getText().toString();
+                    if (url!=null && !searchEditText.getText().toString().equals(""))  {
+                        final Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setData(Uri.parse(url));
 
+                        startActivity(intent);
+                    }
+                    return true;
+                }
+                return false;
+            }
+        });
         return layout;
     }
 
@@ -108,17 +115,9 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         appDatabase = RoomdatabaseSingleton.getInstance(getActivity());
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        final boolean isInitNeeded = preferences.getBoolean("isInitNeeded",true);
-        if(isInitNeeded) {
-            loadDataFromSystem(getActivity().getPackageManager(), appDatabase);
-            preferences.edit().putBoolean("isInitNeeded",false).apply();
-        }else {
-            new LoadFromDBAsyncTask(this,appDatabase,addAppName).execute();
-        }
+        new LoadFromDBAsyncTask(this,appDatabase,addAppName).execute();
 
         while(mAdapterData==null){
             try {
@@ -143,6 +142,7 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
             public void onClick(View v) {
                 InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mRootLayout.getWindowToken(), 0);
+                searchEditText.setCursorVisible(false);
             }
         });
 
@@ -154,32 +154,6 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
-    }
-
-    private void loadDataFromSystem(PackageManager packageManager, AppDatabase appDatabase ) {
-        final ArrayList<AppModelPersistant> apps = new ArrayList<>();
-        final AppDAOPersistant appDAOPersistant = appDatabase.appDaoPersistant();
-
-        List<ApplicationInfo> avalibleActivities = packageManager.getInstalledApplications(0);
-        for(ApplicationInfo appInfo: avalibleActivities){
-            if( packageManager.getLaunchIntentForPackage(appInfo.packageName) != null ) {
-                final AppModelPersistant appModelPersistant = new AppModelPersistant();
-                String appName = appInfo.packageName;
-                String appLabel = (String) appInfo.loadLabel(packageManager);
-
-                appModelPersistant.setName(appName);
-                appModelPersistant.setLabel(appLabel);
-                apps.add(appModelPersistant);
-            }
-        }
-        mAdapterData = new ArrayList<AppModel>();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                appDAOPersistant.insert(apps);
-            }
-        }).start();
-
     }
 
 
@@ -209,13 +183,15 @@ public class DesktopFragment extends LauncherAbstractFragment implements OnStart
             AppDAO appDAO = appDatabase.appDao();
             final List<AppModel> appModels = appDAO.getAll();
             if(addAppName!=null && appDAO.getByName(addAppName)==null){
-                final AppModelPersistant appModelPersistant = appDAOPersistant.getByName(addAppName);
+                final AppModelChosen appModelChosen = appDAOPersistant.getByName(addAppName);
                 final AppModel modelToAdd= new AppModel();
-                modelToAdd.setName(appModelPersistant.getName());
-                modelToAdd.setLabel(appModelPersistant.getLabel());
+                modelToAdd.setName(appModelChosen.getName());
+                modelToAdd.setLabel(appModelChosen.getLabel());
                 appModels.add(modelToAdd);
-                appDAOPersistant.delete(appModelPersistant.getName());
+                appDAOPersistant.delete(appModelChosen.getName());
+
             }
+
             gridFragment.setmAdapterData((ArrayList)appModels);
             return null;
         }

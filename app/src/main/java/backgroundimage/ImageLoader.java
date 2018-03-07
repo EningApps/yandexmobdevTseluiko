@@ -22,7 +22,15 @@ import java.util.Locale;
 
 class ImageLoader {
 
-    private static volatile ImageLoader sInstance;
+    private static ImageLoader sInstance;
+
+    public static ImageLoader getsInstance(){
+        if(sInstance==null){
+            sInstance = new ImageLoader();
+        }
+        return sInstance;
+    }
+
 
     private List<String> mImageUrls = new ArrayList<>();
 
@@ -32,7 +40,7 @@ class ImageLoader {
                     && "img".equals(parser.getName())) {
                 for (int i = 1; i < parser.getAttributeCount(); i++) {
                     if ("size".equals(parser.getAttributeName(i))
-                            && "XXXL".equals(parser.getAttributeValue(i))) {
+                            && "XL".equals(parser.getAttributeValue(i))) {
                         return parser.getAttributeValue(i-1);
                     }
                 }
@@ -79,18 +87,18 @@ class ImageLoader {
             ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
             int nRead;
-            byte[] data = new byte[16384];
+            byte[] data = new byte[1630];
 
             while ((nRead = is.read(data, 0, data.length)) != -1) {
                 buffer.write(data, 0, nRead);
             }
             buffer.flush();
             byte [] bitmap = buffer.toByteArray();
+            data = null;
             return BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
         } catch (IOException e) {
 
         }
         return null;
     }
-
 }

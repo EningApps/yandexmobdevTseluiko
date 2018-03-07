@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import desktop.RoomdatabaseSingleton;
@@ -25,14 +26,15 @@ import launcher.MainLauncherActivity;
 
 public class IconRecycleAdapterPersistant extends RecyclerView.Adapter{
 
-    List<AppModelPersistant> data;
+    List<AppModelChosen> mPersistantData;
+    List<AppModelChosen> mfilteredData;
     private PackageManager mPackageManager;
     private Context mContext;
 
     private AppDatabase database;
 
-    public IconRecycleAdapterPersistant(List<AppModelPersistant> data, PackageManager mPackageManager, Context mContext) {
-        this.data = data;
+    public IconRecycleAdapterPersistant(List<AppModelChosen> data, PackageManager mPackageManager, Context mContext) {
+        this.mPersistantData = data;
         this.mPackageManager = mPackageManager;
         this.mContext = mContext;
         database = RoomdatabaseSingleton.getInstance(mContext);
@@ -40,14 +42,14 @@ public class IconRecycleAdapterPersistant extends RecyclerView.Adapter{
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.icon_linear_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.icon_linear_layout_app_choose, parent, false);
         return new DesktopRecyclerViewHolder.IconLinearHolder(view);
 
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return mPersistantData.size();
     }
 
     @Override
@@ -58,21 +60,25 @@ public class IconRecycleAdapterPersistant extends RecyclerView.Adapter{
             @Override
             public void onClick(View v) {
                 final Intent intent = new Intent(mContext, MainLauncherActivity.class);
-                intent.putExtra("app_name",data.get(position).getName());
+                intent.putExtra("app_name", mPersistantData.get(position).getName());
                 final AppDAOPersistant appDAOPersistant = database.appDaoPersistant();
                 mContext.startActivity(intent);
             }
         });
         ApplicationInfo appInfo=null;
         try {
-            appInfo = mPackageManager.getApplicationInfo(data.get(position).getName(), 0);
+            appInfo = mPackageManager.getApplicationInfo(mPersistantData.get(position).getName(), 0);
         } catch (PackageManager.NameNotFoundException e) {}
         iconView.setBackground(appInfo.loadIcon(mPackageManager));
         final TextView textView = (TextView) ((DesktopRecyclerViewHolder.IconLinearHolder) holder).getTitleTextView();
-        textView.setText(data.get(position).getLabel());
+        textView.setText(mPersistantData.get(position).getLabel());
 
     }
 
+    public void filterList(ArrayList<AppModelChosen> filterdData) {
+        this.mPersistantData = filterdData;
+        notifyDataSetChanged();
+    }
 
     public PackageManager getPackageManager() {
         return mPackageManager;
@@ -81,6 +87,8 @@ public class IconRecycleAdapterPersistant extends RecyclerView.Adapter{
     public void setPackageManager(PackageManager packageManager) {
         this.mPackageManager = packageManager;
     }
+
+
 
 }
 

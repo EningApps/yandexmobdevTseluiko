@@ -1,5 +1,7 @@
 package launcher;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -15,8 +17,10 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +31,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
 import com.tseluikoartem.ening.yandexmobdevproject.R;
@@ -37,8 +42,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.AppsDbHelper;
+import desktop.RoomdatabaseSingleton;
 import desktop.appchooser.AppChooseActivity;
+import desktop.appchooser.AppDAOPersistant;
+import desktop.appchooser.AppModelChosen;
 import desktop.recyclerview.DesktopFragment;
+import desktop.roomdatabase.AppDatabase;
 import launcher.fragments.GridIconsFragment;
 import launcher.fragments.LauncherAbstractFragment;
 import launcher.fragments.ListIconsFragment;
@@ -64,6 +73,7 @@ public class MainLauncherActivity extends AppCompatActivity
     private AppsDbHelper mBdHelper;
     private PackageManager mPackageManager;
     private LauncherRecyclerAbstractAdapter mAdapter;
+    private ViewPager mFragmentsViewPager;
 
 
     public List<AppModel> getmData() {
@@ -100,7 +110,6 @@ public class MainLauncherActivity extends AppCompatActivity
         }
         else {
             mData = loadDataFromDB(mBdHelper, mPackageManager);
-
         }
         while(mData == null){
             try {
@@ -128,6 +137,7 @@ public class MainLauncherActivity extends AppCompatActivity
         }else {
             mFragments.add(desktopFragment);
             setLauncherFragment(gridIconsFragment);
+            setRecyclerViewComponents(new RecyclerView(this),0);
         }
 
         mReciver.setAdapter(mAdapter);
@@ -165,12 +175,20 @@ public class MainLauncherActivity extends AppCompatActivity
         return data;
     }
 
+
+
+
     private List<AppModel> loadDataFromSystem(AppsDbHelper dbHelper, PackageManager packageManager) {
-        List<AppModel> apps = new ArrayList<>();
+
+        final List<AppModel> apps = new ArrayList<>();
+        final List<AppModelChosen> appsChosen = new ArrayList<>();
+        final AppDatabase appDatabase = RoomdatabaseSingleton.getInstance(this);
+        final AppDAOPersistant appDAOPersistant = appDatabase.appDaoPersistant();
         List<ApplicationInfo> avalibleActivities = packageManager.getInstalledApplications(0);
         for(ApplicationInfo appInfo: avalibleActivities){
             if( packageManager.getLaunchIntentForPackage(appInfo.packageName) != null ) {
                 AppModel appModel = new AppModel();
+                AppModelChosen appModelChosen = new AppModelChosen();
                 String appName = appInfo.packageName;
                 String appLabel = (String) appInfo.loadLabel(packageManager);
                 Drawable appIcon = appInfo.loadIcon(packageManager);
@@ -189,22 +207,41 @@ public class MainLauncherActivity extends AppCompatActivity
                 appModel.setIcon(appIcon);
                 appModel.setLabel(appLabel);
                 apps.add(appModel);
+
+                appModelChosen.setLabel(appLabel);
+                appModelChosen.setName(appName);
+                appsChosen.add(appModelChosen);
             }
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                appDAOPersistant.insert(appsChosen);
+            }
+        }).start();
         return apps;
     }
 
     private void findViews(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_launcher_activity);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_launcher_activity);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        final NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         final View navigationHeaderView = navigationView.getHeaderView(0);
+
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                    inputManager.hideSoftInputFromWindow(toolbar.getWindowToken(), 0);
+                }
+        });
+
         final FloatingActionButton floatingActionButton = findViewById(R.id.fab_launcher);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -223,12 +260,56 @@ public class MainLauncherActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
+
+        mFragmentsViewPager = findViewById(R.id.fragmentsViewPager);
+        mFragmentsViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                switch (position){
+                    case 0:
+                        return mFragments.get(0);
+                    case 1:
+                        return mFragments.get(1);
+                    case 2:
+                        return mFragments.get(2);
+                    default:
+                        return mFragments.get(0);
+                }
+            }
+            @Override
+            public int getCount() {
+                return 3;
+            }
+        });
+        mFragmentsViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(mFragmentsViewPager.getWindowToken(), 0);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        mFragmentsViewPager.setCurrentItem(0);
     }
 
     private void setLauncherFragment(LauncherAbstractFragment fragment){
-        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentsContainer,fragment).commit();
-
+        if(fragment instanceof GridIconsFragment){
+            mFragmentsViewPager.setCurrentItem(0);
+        }else if(fragment instanceof ListIconsFragment){
+            mFragmentsViewPager.setCurrentItem(1);
+        }else if(fragment instanceof DesktopFragment){
+            mFragmentsViewPager.setCurrentItem(2);
+        }
+        mFragmentsViewPager.getAdapter().notifyDataSetChanged();
     }
 
     private void sortData(){
@@ -343,12 +424,17 @@ public class MainLauncherActivity extends AppCompatActivity
         mReciver.setAdapter(mAdapter);
     }
 
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_launcher_activity);
+        InputMethodManager inputManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputManager.hideSoftInputFromWindow(drawer.getWindowToken(), 0);
         int id = item.getItemId();
         if (id == R.id.nav_launcher) {
             setLauncherFragment(mFragments.get(0));
-
         } else if (id == R.id.nav_list) {
             setLauncherFragment(mFragments.get(1));
 
@@ -359,7 +445,7 @@ public class MainLauncherActivity extends AppCompatActivity
             setLauncherFragment(mFragments.get(2));
 
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_launcher_activity);
+
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
