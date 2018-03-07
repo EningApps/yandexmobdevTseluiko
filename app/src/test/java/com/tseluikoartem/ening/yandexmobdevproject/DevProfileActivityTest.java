@@ -1,8 +1,6 @@
 package com.tseluikoartem.ening.yandexmobdevproject;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.View;
 import com.tseluikoartem.ening.yandexmobdevproject.activities.DevProfileActivity;
 
