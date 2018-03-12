@@ -450,5 +450,10 @@ public class MainLauncherActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+
+    }
+
 
 }

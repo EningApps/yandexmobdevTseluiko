@@ -22,7 +22,6 @@ public class ListIconsFragment extends LauncherAbstractFragment {
     private RecyclerView mRecyclerView;
     private View mRootView;
     private OnFragmentsContentInteractionListener mListener;
-    private Drawable mBackgroundDrawable;
 
 
     public ListIconsFragment() {
@@ -33,16 +32,6 @@ public class ListIconsFragment extends LauncherAbstractFragment {
     public static ListIconsFragment newInstance() {
         ListIconsFragment fragment = new ListIconsFragment();
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState!=null){
-            mBackgroundDrawable = new BitmapDrawable(getResources(), (Bitmap) savedInstanceState.getParcelable("background"));
-        }
-
-        setRetainInstance(true);
     }
 
     @Override
@@ -72,20 +61,9 @@ public class ListIconsFragment extends LauncherAbstractFragment {
 
     @Override
     public void onResume() {
-//        if(mBackgroundDrawable!=null){
-//            mRootView.setBackground(mBackgroundDrawable);
-//        }
-//        else {
-            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
-            imagesLoadedReciver.registerBackground(mRootView);
-//        }
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        mBackgroundDrawable = mRootView.getBackground();
-        super.onPause();
+         final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+         imagesLoadedReciver.registerBackground(mRootView);
+         super.onResume();
     }
 
 
