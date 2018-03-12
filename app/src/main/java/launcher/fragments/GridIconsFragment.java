@@ -2,9 +2,6 @@ package launcher.fragments;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,8 +18,6 @@ public class GridIconsFragment extends LauncherAbstractFragment {
     private RecyclerView mRecyclerView;
     private View mRootView;
     private OnFragmentsContentInteractionListener mListener;
-    private Drawable mBackgroundDrawable;
-
 
     public GridIconsFragment() {
         // Required empty public constructor
@@ -33,26 +28,13 @@ public class GridIconsFragment extends LauncherAbstractFragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (savedInstanceState!=null){
-            mBackgroundDrawable = new BitmapDrawable(getResources(), (Bitmap) savedInstanceState.getParcelable("background"));
-        }
-        setRetainInstance(true);
-    }
+
 
     @Override
     public void onResume() {
-//        if(mBackgroundDrawable!=null){
-//            mRootView.setBackground(mBackgroundDrawable);
-//        }
-//        else {
 
-            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
-            imagesLoadedReciver.registerBackground(mRootView);
-
-       // }
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        imagesLoadedReciver.registerBackground(mRootView);
         super.onResume();
 
     }
@@ -70,7 +52,6 @@ public class GridIconsFragment extends LauncherAbstractFragment {
 
     @Override
     public void onPause() {
-        mBackgroundDrawable = mRootView.getBackground();
         super.onPause();
     }
 
