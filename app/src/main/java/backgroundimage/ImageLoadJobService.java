@@ -11,11 +11,6 @@ import static utils.ApplicationConstants.BackgroundImagesConstants.*;
 
 public class ImageLoadJobService extends JobService {
 
-    private final ImageLoader mImageLoader;
-
-    public ImageLoadJobService() {
-        mImageLoader = new ImageLoader();
-    }
 
     @Override
     public boolean onStartJob(final JobParameters params) {
@@ -24,7 +19,7 @@ public class ImageLoadJobService extends JobService {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    final List<String> loadedUrls = mImageLoader.getImageUrls();
+                    final List<String> loadedUrls = ImageLoader.getsInstance().getImageUrls();
                     final String[] imagesUrls = new String[loadedUrls.size()];
                     for (int i = 0; i < loadedUrls.size(); i++) {
                         imagesUrls[i]=loadedUrls.get(i);

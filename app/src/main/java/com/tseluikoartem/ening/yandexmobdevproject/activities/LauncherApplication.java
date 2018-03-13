@@ -21,7 +21,6 @@ import static utils.ApplicationConstants.BackgroundImagesConstants.JOB_ID_LOAD_I
 
 public class LauncherApplication extends Application  {
 
-    private String[] imagesFileNames;
 
     @Override
     public void onCreate() {
@@ -37,7 +36,6 @@ public class LauncherApplication extends Application  {
                     new JobInfo.Builder(JOB_ID_LOAD_IMAGE,
                             new ComponentName(getApplicationContext(), ImageLoadJobService.class))
                             .setOverrideDeadline(0L)
-                            //.setPeriodic(90005)
                             .build()
             );
         }

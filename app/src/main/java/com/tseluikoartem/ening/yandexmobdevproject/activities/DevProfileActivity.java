@@ -165,7 +165,7 @@ public class DevProfileActivity extends AppCompatActivity {
             mRootView.setBackground(mBackgroundDrawable);
         }
         else {
-            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getsInstance();
             imagesLoadedReciver.registerBackground(mRootView);
         }
         checkForCrashes();

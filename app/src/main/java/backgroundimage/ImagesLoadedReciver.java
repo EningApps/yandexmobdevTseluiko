@@ -19,13 +19,18 @@ public class ImagesLoadedReciver extends BroadcastReceiver {
 
     private static String[] mImagesUrls = new String[0];
 
-    private static final ImagesLoadedReciver INSTANCE = new ImagesLoadedReciver();
+    private static ImagesLoadedReciver sInstance;
+
+    public static ImagesLoadedReciver getsInstance(){
+        if(sInstance==null){
+            sInstance = new ImagesLoadedReciver();
+        }
+        return sInstance;
+    }
+
     private static final List<View> mBackgrounds = new ArrayList<>();
 
     private static int mAllSamePicIndex ;
-
-
-
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
@@ -59,11 +64,6 @@ public class ImagesLoadedReciver extends BroadcastReceiver {
         final BackgroundImageAsyncChanger imageAsyncChanger = new BackgroundImageAsyncChanger(view,view.getContext());
         imageAsyncChanger.execute(mImagesUrls[index]);
 
-    }
-
-
-    public static ImagesLoadedReciver getInstance() {
-        return INSTANCE;
     }
 }
 
