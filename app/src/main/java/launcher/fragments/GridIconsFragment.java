@@ -33,7 +33,7 @@ public class GridIconsFragment extends LauncherAbstractFragment {
     @Override
     public void onResume() {
 
-        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getsInstance();
         imagesLoadedReciver.registerBackground(mRootView);
         super.onResume();
 

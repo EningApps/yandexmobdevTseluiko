@@ -46,7 +46,6 @@ class ImageLoader {
                 }
             }
         }
-
         return null;
     }
 
@@ -94,7 +93,6 @@ class ImageLoader {
             }
             buffer.flush();
             byte [] bitmap = buffer.toByteArray();
-            data = null;
             return BitmapFactory.decodeByteArray(bitmap, 0, bitmap.length);
         } catch (IOException e) {
 

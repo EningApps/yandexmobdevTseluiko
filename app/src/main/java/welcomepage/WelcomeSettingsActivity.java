@@ -82,7 +82,7 @@ public class WelcomeSettingsActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         final View rootView = findViewById(R.id.root_welcome_settings_layout);
-        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getInstance();
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getsInstance();
         imagesLoadedReciver.registerBackground(rootView);
         super.onResume();
     }
