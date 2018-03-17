@@ -31,6 +31,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/sea"/>
 
+
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -40,6 +41,12 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/colorAccentLight" />
 
 
     <android.support.v4.view.ViewPager

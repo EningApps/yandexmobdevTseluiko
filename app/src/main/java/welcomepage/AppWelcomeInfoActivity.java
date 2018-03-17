@@ -77,5 +77,10 @@ public class AppWelcomeInfoActivity extends AppCompatActivity {
         super.onPause();
     }
 
-
+    @Override
+    protected void onDestroy() {
+        final View rootView = findViewById(R.id.root_app_info_layout);
+        rootView.setBackground(null);
+        super.onDestroy();
+    }
 }

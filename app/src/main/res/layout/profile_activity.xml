@@ -3,17 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dev_prof_root_layout"
+    android:background="@drawable/logo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.tseluikoartem.ening.yandexmobdevproject.welcomepage.GreetingActivity">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbarProfile"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="4dp"
+        android:background="@color/colorAccentLight" />
 
     <ScrollView
         android:layout_width="match_parent"
