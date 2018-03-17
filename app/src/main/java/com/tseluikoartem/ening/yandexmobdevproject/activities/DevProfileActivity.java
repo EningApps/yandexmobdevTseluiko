@@ -8,14 +8,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +37,6 @@ public class DevProfileActivity extends AppCompatActivity {
     private TextView mGitLink, mFacebookLink, mTwitterLink, mVkLink;
     private View mGitField, mFacebookField, mTwitterField, mVkField;
     private View mRootView;
-    private Drawable mBackgroundDrawable;
 
 
     @Override
@@ -61,15 +56,6 @@ public class DevProfileActivity extends AppCompatActivity {
         Fabric.with(this, new Crashlytics());
         setContentView(R.layout.profile_activity);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarProfile);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        if (savedInstanceState!=null){
-            mBackgroundDrawable = new BitmapDrawable(getResources(), (Bitmap) savedInstanceState.getParcelable("background"));
-        }
 
         mRootView = findViewById(R.id.dev_prof_root_layout);
 
@@ -150,39 +136,28 @@ public class DevProfileActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId()==android.R.id.home) {
-            onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(mBackgroundDrawable!=null){
-            mRootView.setBackground(mBackgroundDrawable);
-        }
-        else {
-            final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getsInstance();
-            imagesLoadedReciver.registerBackground(mRootView);
-        }
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getsInstance();
+        imagesLoadedReciver.registerBackground(mRootView);
         checkForCrashes();
 
     }
 
     @Override
     public void onPause() {
-        super.onPause();
-        mBackgroundDrawable = mRootView.getBackground();
         unregisterManagers();
+        super.onPause();
     }
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
+        final ImagesLoadedReciver imagesLoadedReciver = ImagesLoadedReciver.getsInstance();
+        imagesLoadedReciver.unRegisterBackground(mRootView);
         unregisterManagers();
+        super.onDestroy();
     }
 
     private void checkForCrashes() {
@@ -194,13 +169,10 @@ public class DevProfileActivity extends AppCompatActivity {
         UpdateManager.register(this);
     }
 
+
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        if(mBackgroundDrawable!=null){
-            final Bitmap backBitmap = ((BitmapDrawable)mBackgroundDrawable).getBitmap();
-            outState.putParcelable("background",backBitmap);
-        }
-        super.onSaveInstanceState(outState);
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void unregisterManagers() {

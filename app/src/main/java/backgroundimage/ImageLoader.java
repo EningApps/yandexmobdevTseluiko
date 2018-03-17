@@ -40,7 +40,7 @@ class ImageLoader {
                     && "img".equals(parser.getName())) {
                 for (int i = 1; i < parser.getAttributeCount(); i++) {
                     if ("size".equals(parser.getAttributeName(i))
-                            && "XL".equals(parser.getAttributeValue(i))) {
+                            && "XXL".equals(parser.getAttributeValue(i))) {
                         return parser.getAttributeValue(i-1);
                     }
                 }

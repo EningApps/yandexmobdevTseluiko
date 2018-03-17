@@ -46,9 +46,14 @@ public class ImagesLoadedReciver extends BroadcastReceiver {
 
     public void registerBackground(View view){
         mBackgrounds.add(view);
-        if(mImagesUrls.length!=0){
+        if(mImagesUrls.length>0){
             setBackround(view, view.getContext());
         }
+
+    }
+
+    public void unRegisterBackground(View view){
+        mBackgrounds.remove(view);
 
     }
 
